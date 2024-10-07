@@ -5,7 +5,7 @@ Wps
 ## Table of Contents
 
 - [About](#about)
-- [Getting Started](#installing)
+- [Installing](#installing)
 
 ## About <a name = "about"></a>
 
