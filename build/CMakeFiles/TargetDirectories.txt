@@ -1,0 +1,7 @@
+C:/Proj/wps/build/CMakeFiles/wps.dir
+C:/Proj/wps/build/CMakeFiles/edit_cache.dir
+C:/Proj/wps/build/CMakeFiles/rebuild_cache.dir
+C:/Proj/wps/build/CMakeFiles/install.dir
+C:/Proj/wps/build/CMakeFiles/install/local.dir
+C:/Proj/wps/build/CMakeFiles/wps_autogen_timestamp_deps.dir
+C:/Proj/wps/build/CMakeFiles/wps_autogen.dir
