@@ -1,0 +1,8 @@
+C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/wps.dir
+C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/edit_cache.dir
+C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/list_install_components.dir
+C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/install.dir
+C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/install/local.dir
+C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/wps_autogen_timestamp_deps.dir
+C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/wps_autogen.dir

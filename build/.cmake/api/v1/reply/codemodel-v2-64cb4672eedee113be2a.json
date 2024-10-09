@@ -1,0 +1,205 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-67e194ba7e6553817c3d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "wps",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "wps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wps-Debug-80ddce999985670d331e.json",
+					"name" : "wps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "wps_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wps_autogen-Debug-e61506c281bc636e9463.json",
+					"name" : "wps_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "wps_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wps_autogen_timestamp_deps-Debug-af45747c50f041619576.json",
+					"name" : "wps_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-e67f7c292378d61bddc4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "wps",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "wps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wps-Release-e8f20fd855f932444601.json",
+					"name" : "wps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "wps_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wps_autogen-Release-02859e554c43c29fd511.json",
+					"name" : "wps_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "wps_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wps_autogen_timestamp_deps-Release-af45747c50f041619576.json",
+					"name" : "wps_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-RelWithDebInfo-734f1e813e09ac5f3255.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "wps",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "wps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wps-RelWithDebInfo-a16259132249912b6d40.json",
+					"name" : "wps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "wps_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wps_autogen-RelWithDebInfo-2a0811a95b0179c83994.json",
+					"name" : "wps_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "wps_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-wps_autogen_timestamp_deps-RelWithDebInfo-af45747c50f041619576.json",
+					"name" : "wps_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Proj/wps/build",
+		"source" : "C:/Proj/wps"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
