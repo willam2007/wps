@@ -1,0 +1,21 @@
+# ninja log v5
+28	422	7501874341026469	C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/cmake.verify_globs	ea54cf79141ecc06
+748	2664	7501517313563630	CMakeFiles/wps.dir/wps_autogen/mocs_compilation.cpp.obj	d9e109068de0658c
+400	747	7501517293883451	C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/timestamp	f3f7034f1418e0e2
+400	747	7501517293883451	wps_autogen/timestamp	f3f7034f1418e0e2
+400	747	7501517293883451	C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/mocs_compilation.cpp	f3f7034f1418e0e2
+400	747	7501517293883451	wps_autogen/mocs_compilation.cpp	f3f7034f1418e0e2
+651	3608	7500906485993556	CMakeFiles/wps.dir/mainwindow.cpp.obj	91879a0745c44b21
+645	3512	7500906485016179	CMakeFiles/wps.dir/main.cpp.obj	ce35dbdbe67f962a
+2709	3082	7501517317223857	wps.exe	51ebceb1a86484d8
+129	859	7501874353233211	build.ninja	2ea48fedb36e01e4
+751	2665	7501517313573614	CMakeFiles/wps.dir/src/main.cpp.obj	a85b739855e281f
+755	2709	7501517314012432	CMakeFiles/wps.dir/src/mainwindow/mainwindow.cpp.obj	b0a54c308d96f2eb
+422	1486	7501874353233211	build.ninja	2ea48fedb36e01e4
+17	396	0	C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/cmake.verify_globs	ea54cf79141ecc06
+416	532	7501519273059392	wps_autogen/timestamp	f3f7034f1418e0e2
+416	532	7501519273059392	wps_autogen/mocs_compilation.cpp	f3f7034f1418e0e2
+416	532	7501519273059392	C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/timestamp	f3f7034f1418e0e2
+416	532	7501519273059392	C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/mocs_compilation.cpp	f3f7034f1418e0e2
+544	2556	7501874379345669	CMakeFiles/wps.dir/src/main.cpp.obj	a85b739855e281f
+2556	2857	7501874381850059	wps.exe	51ebceb1a86484d8
