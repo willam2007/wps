@@ -1,7 +1,5 @@
-# Project Title
-
-Wps
-
+# WPS
+Wizard's Picture Studio
 ## Table of Contents
 
 - [About](#about)
@@ -9,7 +7,7 @@ Wps
 
 ## About <a name = "about"></a>
 
-Russian open source graphic raster editor
+Russian open source graphic raster editor.
 
 ## Installing <a name = "installing"></a>
 
@@ -23,4 +21,4 @@ Russian open source graphic raster editor
 
 4. Дальше простро устанавливаем и ожидаем..
 
-PS. Так же у вас должен быть установлен CMake, MSVC 2022 64amd. Базовые расширения дл Qt в VScode. Так же для себя можно установить кучу разных классных расширений для упрощени работы)
+PS. Так же у вас должен быть установлен CMake, MSVC(Чтобы просто не заморачиваться, можно скачать Microsoft Visual Studio, и тогда автоматом поставится MSVC) 2022 64amd. Базовые расширения дл Qt в VScode. Так же для себя можно установить кучу разных классных расширений для упрощени работы)
