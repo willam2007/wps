@@ -50,10 +50,12 @@ set(OLD_GLOB
   "C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/mocs_compilation.cpp"
   "C:/Proj/wps/build/wps_autogen/include_Debug/EWIEGA46WW/moc_mainwindow.cpp"
   "C:/Proj/wps/build/wps_autogen/include_Debug/GFTB6AWTXV/moc_mainwindow.cpp"
+  "C:/Proj/wps/build/wps_autogen/include_Debug/GFTB6AWTXV/moc_scribblearea.cpp"
   "C:/Proj/wps/build/wps_autogen/include_Debug/K6S233IZAZ/moc_mainwindow.cpp"
   "C:/Proj/wps/build/wps_autogen/mocs_compilation_Debug.cpp"
   "C:/Proj/wps/src/main.cpp"
   "C:/Proj/wps/src/mainwindow/mainwindow.cpp"
+  "C:/Proj/wps/src/mainwindow/scribblearea.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -77,6 +79,7 @@ set(OLD_GLOB
   "C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/include/ui_mainwindow.h"
   "C:/Proj/wps/build/wps_autogen/include_Debug/ui_mainwindow.h"
   "C:/Proj/wps/src/mainwindow/mainwindow.h"
+  "C:/Proj/wps/src/mainwindow/scribblearea.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>793</width>
-    <height>600</height>
+    <width>1920</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -100,39 +100,14 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>130</y>
-      <width>201</width>
-      <height>41</height>
+      <x>630</x>
+      <y>580</y>
+      <width>75</width>
+      <height>24</height>
      </rect>
     </property>
-    <property name="cursor">
-     <cursorShape>WaitCursor</cursorShape>
-    </property>
-    <property name="mouseTracking">
-     <bool>true</bool>
-    </property>
-    <property name="tabletTracking">
-     <bool>false</bool>
-    </property>
-    <property name="contextMenuPolicy">
-     <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Коля лох&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="accessibleDescription">
-     <string/>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
     <property name="text">
-     <string>Сюда можно нажать
-А еще текст если долго навести</string>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
+     <string>Запуск</string>
     </property>
    </widget>
   </widget>
@@ -141,7 +116,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>793</width>
+     <width>1920</width>
      <height>22</height>
     </rect>
    </property>

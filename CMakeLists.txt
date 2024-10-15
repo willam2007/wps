@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(Qt6PrintSupport REQUIRED)
 
 set(TS_FILES wps_ru_RU.ts)
 
@@ -19,9 +20,11 @@ set(PROJECT_SOURCES
     #src files
         src/main.cpp
         src/mainwindow/mainwindow.cpp
+        src/mainwindow/scribblearea.cpp
 
     #headers files
         src/mainwindow/mainwindow.h
+        src/mainwindow/scribblearea.h
     
     #ui files
         src/mainwindow/mainwindow.ui
@@ -57,6 +60,7 @@ else()
 endif()
 
 target_link_libraries(wps PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(wps PRIVATE Qt6::PrintSupport)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

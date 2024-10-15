@@ -39,7 +39,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
         MainWindow->setEnabled(true);
-        MainWindow->resize(793, 600);
+        MainWindow->resize(1920, 1080);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -74,17 +74,11 @@ public:
         pushButton_2->setFont(font2);
         pushButton_3 = new QPushButton(centralwidget);
         pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(410, 130, 201, 41));
-        pushButton_3->setCursor(QCursor(Qt::CursorShape::WaitCursor));
-        pushButton_3->setMouseTracking(true);
-        pushButton_3->setTabletTracking(false);
-        pushButton_3->setContextMenuPolicy(Qt::ContextMenuPolicy::DefaultContextMenu);
-        pushButton_3->setAutoFillBackground(false);
-        pushButton_3->setCheckable(false);
+        pushButton_3->setGeometry(QRect(630, 580, 75, 24));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 793, 22));
+        menubar->setGeometry(QRect(0, 0, 1920, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -112,14 +106,7 @@ public:
         pushButton_2->setAccessibleDescription(QCoreApplication::translate("MainWindow", "\320\232\320\276\320\273\321\217", nullptr));
 #endif // QT_CONFIG(accessibility)
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\320\266\320\274\320\270", nullptr));
-#if QT_CONFIG(tooltip)
-        pushButton_3->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>\320\232\320\276\320\273\321\217 \320\273\320\276\321\205</p></body></html>", nullptr));
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(accessibility)
-        pushButton_3->setAccessibleDescription(QString());
-#endif // QT_CONFIG(accessibility)
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "\320\241\321\216\320\264\320\260 \320\274\320\276\320\266\320\275\320\276 \320\275\320\260\320\266\320\260\321\202\321\214\n"
-"\320\220 \320\265\321\211\320\265 \321\202\320\265\320\272\321\201\321\202 \320\265\321\201\320\273\320\270 \320\264\320\276\320\273\320\263\320\276 \320\275\320\260\320\262\320\265\321\201\321\202\320\270", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\320\277\321\203\321\201\320\272", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi
 

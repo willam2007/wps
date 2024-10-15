@@ -44,27 +44,36 @@ include CMakeFiles\common.ninja
 build cmake_object_order_depends_target_wps_DEBUG: phony || wps_autogen$:Debug wps_autogen\mocs_compilation_Debug.cpp wps_autogen\timestamp wps_autogen_timestamp_deps$:Debug
 
 build CMakeFiles\wps.dir\Debug\wps_autogen\mocs_compilation_Debug.cpp.obj: CXX_COMPILER__wps_unscanned_Debug C$:\Proj\wps\build\wps_autogen\mocs_compilation_Debug.cpp || cmake_object_order_depends_target_wps_DEBUG
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -DCMAKE_INTDIR=\"Debug\"
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -DCMAKE_INTDIR=\"Debug\"
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd -Zc:__cplusplus -permissive- -utf-8
-  INCLUDES = -IC:\Proj\wps\build\wps_autogen\include_Debug -external:IC:\Qt\6.7.3\msvc2022_64\include\QtCore -external:IC:\Qt\6.7.3\msvc2022_64\include -external:IC:\Qt\6.7.3\msvc2022_64\mkspecs\win32-msvc -external:IC:\Qt\6.7.3\msvc2022_64\include\QtWidgets -external:IC:\Qt\6.7.3\msvc2022_64\include\QtGui -external:W0
+  INCLUDES = -IC:\Proj\wps\build\wps_autogen\include_Debug -external:IC:\Qt\6.7.3\msvc2022_64\include\QtCore -external:IC:\Qt\6.7.3\msvc2022_64\include -external:IC:\Qt\6.7.3\msvc2022_64\mkspecs\win32-msvc -external:IC:\Qt\6.7.3\msvc2022_64\include\QtWidgets -external:IC:\Qt\6.7.3\msvc2022_64\include\QtGui -external:IC:\Qt\6.7.3\msvc2022_64\include\QtPrintSupport -external:W0
   OBJECT_DIR = CMakeFiles\wps.dir\Debug
   OBJECT_FILE_DIR = CMakeFiles\wps.dir\Debug\wps_autogen
   TARGET_COMPILE_PDB = CMakeFiles\wps.dir\Debug\
   TARGET_PDB = Debug\wps.pdb
 
 build CMakeFiles\wps.dir\Debug\src\main.cpp.obj: CXX_COMPILER__wps_unscanned_Debug C$:\Proj\wps\src\main.cpp || cmake_object_order_depends_target_wps_DEBUG
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -DCMAKE_INTDIR=\"Debug\"
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -DCMAKE_INTDIR=\"Debug\"
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd -Zc:__cplusplus -permissive- -utf-8
-  INCLUDES = -IC:\Proj\wps\build\wps_autogen\include_Debug -external:IC:\Qt\6.7.3\msvc2022_64\include\QtCore -external:IC:\Qt\6.7.3\msvc2022_64\include -external:IC:\Qt\6.7.3\msvc2022_64\mkspecs\win32-msvc -external:IC:\Qt\6.7.3\msvc2022_64\include\QtWidgets -external:IC:\Qt\6.7.3\msvc2022_64\include\QtGui -external:W0
+  INCLUDES = -IC:\Proj\wps\build\wps_autogen\include_Debug -external:IC:\Qt\6.7.3\msvc2022_64\include\QtCore -external:IC:\Qt\6.7.3\msvc2022_64\include -external:IC:\Qt\6.7.3\msvc2022_64\mkspecs\win32-msvc -external:IC:\Qt\6.7.3\msvc2022_64\include\QtWidgets -external:IC:\Qt\6.7.3\msvc2022_64\include\QtGui -external:IC:\Qt\6.7.3\msvc2022_64\include\QtPrintSupport -external:W0
   OBJECT_DIR = CMakeFiles\wps.dir\Debug
   OBJECT_FILE_DIR = CMakeFiles\wps.dir\Debug\src
   TARGET_COMPILE_PDB = CMakeFiles\wps.dir\Debug\
   TARGET_PDB = Debug\wps.pdb
 
 build CMakeFiles\wps.dir\Debug\src\mainwindow\mainwindow.cpp.obj: CXX_COMPILER__wps_unscanned_Debug C$:\Proj\wps\src\mainwindow\mainwindow.cpp || cmake_object_order_depends_target_wps_DEBUG
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -DCMAKE_INTDIR=\"Debug\"
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -DCMAKE_INTDIR=\"Debug\"
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd -Zc:__cplusplus -permissive- -utf-8
-  INCLUDES = -IC:\Proj\wps\build\wps_autogen\include_Debug -external:IC:\Qt\6.7.3\msvc2022_64\include\QtCore -external:IC:\Qt\6.7.3\msvc2022_64\include -external:IC:\Qt\6.7.3\msvc2022_64\mkspecs\win32-msvc -external:IC:\Qt\6.7.3\msvc2022_64\include\QtWidgets -external:IC:\Qt\6.7.3\msvc2022_64\include\QtGui -external:W0
+  INCLUDES = -IC:\Proj\wps\build\wps_autogen\include_Debug -external:IC:\Qt\6.7.3\msvc2022_64\include\QtCore -external:IC:\Qt\6.7.3\msvc2022_64\include -external:IC:\Qt\6.7.3\msvc2022_64\mkspecs\win32-msvc -external:IC:\Qt\6.7.3\msvc2022_64\include\QtWidgets -external:IC:\Qt\6.7.3\msvc2022_64\include\QtGui -external:IC:\Qt\6.7.3\msvc2022_64\include\QtPrintSupport -external:W0
+  OBJECT_DIR = CMakeFiles\wps.dir\Debug
+  OBJECT_FILE_DIR = CMakeFiles\wps.dir\Debug\src\mainwindow
+  TARGET_COMPILE_PDB = CMakeFiles\wps.dir\Debug\
+  TARGET_PDB = Debug\wps.pdb
+
+build CMakeFiles\wps.dir\Debug\src\mainwindow\scribblearea.cpp.obj: CXX_COMPILER__wps_unscanned_Debug C$:\Proj\wps\src\mainwindow\scribblearea.cpp || cmake_object_order_depends_target_wps_DEBUG
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -DCMAKE_INTDIR=\"Debug\"
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd -Zc:__cplusplus -permissive- -utf-8
+  INCLUDES = -IC:\Proj\wps\build\wps_autogen\include_Debug -external:IC:\Qt\6.7.3\msvc2022_64\include\QtCore -external:IC:\Qt\6.7.3\msvc2022_64\include -external:IC:\Qt\6.7.3\msvc2022_64\mkspecs\win32-msvc -external:IC:\Qt\6.7.3\msvc2022_64\include\QtWidgets -external:IC:\Qt\6.7.3\msvc2022_64\include\QtGui -external:IC:\Qt\6.7.3\msvc2022_64\include\QtPrintSupport -external:W0
   OBJECT_DIR = CMakeFiles\wps.dir\Debug
   OBJECT_FILE_DIR = CMakeFiles\wps.dir\Debug\src\mainwindow
   TARGET_COMPILE_PDB = CMakeFiles\wps.dir\Debug\
@@ -78,10 +87,10 @@ build CMakeFiles\wps.dir\Debug\src\mainwindow\mainwindow.cpp.obj: CXX_COMPILER__
 #############################################
 # Link the executable Debug\wps.exe
 
-build Debug\wps.exe: CXX_EXECUTABLE_LINKER__wps_Debug CMakeFiles\wps.dir\Debug\wps_autogen\mocs_compilation_Debug.cpp.obj CMakeFiles\wps.dir\Debug\src\main.cpp.obj CMakeFiles\wps.dir\Debug\src\mainwindow\mainwindow.cpp.obj | C$:\Qt\6.7.3\msvc2022_64\lib\Qt6Widgetsd.lib C$:\Qt\6.7.3\msvc2022_64\lib\Qt6Guid.lib C$:\Qt\6.7.3\msvc2022_64\lib\Qt6Cored.lib C$:\Qt\6.7.3\msvc2022_64\lib\Qt6EntryPointd.lib || wps_autogen$:Debug wps_autogen_timestamp_deps$:Debug
+build Debug\wps.exe: CXX_EXECUTABLE_LINKER__wps_Debug CMakeFiles\wps.dir\Debug\wps_autogen\mocs_compilation_Debug.cpp.obj CMakeFiles\wps.dir\Debug\src\main.cpp.obj CMakeFiles\wps.dir\Debug\src\mainwindow\mainwindow.cpp.obj CMakeFiles\wps.dir\Debug\src\mainwindow\scribblearea.cpp.obj | C$:\Qt\6.7.3\msvc2022_64\lib\Qt6PrintSupportd.lib C$:\Qt\6.7.3\msvc2022_64\lib\Qt6Widgetsd.lib C$:\Qt\6.7.3\msvc2022_64\lib\Qt6Guid.lib C$:\Qt\6.7.3\msvc2022_64\lib\Qt6Cored.lib C$:\Qt\6.7.3\msvc2022_64\lib\Qt6EntryPointd.lib || wps_autogen$:Debug wps_autogen_timestamp_deps$:Debug
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:windows
-  LINK_LIBRARIES = C:\Qt\6.7.3\msvc2022_64\lib\Qt6Widgetsd.lib  C:\Qt\6.7.3\msvc2022_64\lib\Qt6Guid.lib  C:\Qt\6.7.3\msvc2022_64\lib\Qt6Cored.lib  mpr.lib  userenv.lib  C:\Qt\6.7.3\msvc2022_64\lib\Qt6EntryPointd.lib  shell32.lib  d3d11.lib  dxgi.lib  dxguid.lib  d3d12.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = C:\Qt\6.7.3\msvc2022_64\lib\Qt6PrintSupportd.lib  C:\Qt\6.7.3\msvc2022_64\lib\Qt6Widgetsd.lib  C:\Qt\6.7.3\msvc2022_64\lib\Qt6Guid.lib  C:\Qt\6.7.3\msvc2022_64\lib\Qt6Cored.lib  mpr.lib  userenv.lib  C:\Qt\6.7.3\msvc2022_64\lib\Qt6EntryPointd.lib  shell32.lib  d3d11.lib  dxgi.lib  dxguid.lib  d3d12.lib  comdlg32.lib  winspool.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\wps.dir\Debug
   POST_BUILD = cd .
   PRE_LINK = cd .
