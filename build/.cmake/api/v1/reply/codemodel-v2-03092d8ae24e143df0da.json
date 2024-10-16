@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "wps::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-wps-Debug-6c9488ed9b2935f40cda.json",
+					"jsonFile" : "target-wps-Debug-3dccaef75f0bdbfb3225.json",
 					"name" : "wps",
 					"projectIndex" : 0
 				},
@@ -107,7 +107,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "wps::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-wps-Release-03f2d46d7d57b93da029.json",
+					"jsonFile" : "target-wps-Release-e3c4e5392325977994dc.json",
 					"name" : "wps",
 					"projectIndex" : 0
 				},
@@ -170,7 +170,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "wps::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-wps-RelWithDebInfo-bd5ca83d26798dc0b1f8.json",
+					"jsonFile" : "target-wps-RelWithDebInfo-a3be6fd122ee7c9df10a.json",
 					"name" : "wps",
 					"projectIndex" : 0
 				},

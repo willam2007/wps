@@ -38,7 +38,11 @@ private slots:
     void penWidth();
     void about();
 
-    void on_pushButton_3_clicked();
+    void on_create_button_project_clicked();
+    void on_choose_button_project_clicked();
+
+
+
 
 private:
     Ui::MainWindow *ui;

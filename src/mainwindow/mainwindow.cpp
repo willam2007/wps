@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui(new Ui::MainWindow)  // Инициализируем объект Ui::MainWindow
 {
     ui->setupUi(this);  // Настраиваем интерфейс из файла .ui
-
 }
 
 MainWindow::~MainWindow()
@@ -248,22 +247,21 @@ bool MainWindow::saveFile(const QByteArray &fileFormat)
     }
 }
 
-
-
-
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_create_button_project_clicked()
 {
-    // Create the ScribbleArea widget and make it
     // the central widget
     scribbleArea = new ScribbleArea;
     setCentralWidget(scribbleArea);
-
+    setWindowState(Qt::WindowMaximized);
     // Create actions and menus
     createActions();
     createMenus();
 
     // Set the title
     setWindowTitle(tr("Scribble"));
-
 }
 
+void MainWindow::on_choose_button_project_clicked()
+{
+
+}

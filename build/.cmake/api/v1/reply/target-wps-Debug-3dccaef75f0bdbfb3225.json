@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Release/wps.exe"
+			"path" : "Debug/wps.exe"
 		},
 		{
-			"path" : "Release/wps.pdb"
+			"path" : "Debug/wps.pdb"
 		}
 	],
 	"backtrace" : 4,
@@ -302,7 +302,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /O2 /Ob2 /DNDEBUG -std:c++17 -MD"
+					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd"
 				},
 				{
 					"backtrace" : 15,
@@ -326,10 +326,6 @@
 				{
 					"backtrace" : 7,
 					"define" : "QT_GUI_LIB"
-				},
-				{
-					"backtrace" : 15,
-					"define" : "QT_NO_DEBUG"
 				},
 				{
 					"backtrace" : 6,
@@ -368,7 +364,7 @@
 			[
 				{
 					"backtrace" : 0,
-					"path" : "C:/Proj/wps/build/wps_autogen/include_Release"
+					"path" : "C:/Proj/wps/build/wps_autogen/include_Debug"
 				},
 				{
 					"backtrace" : 15,
@@ -423,11 +419,11 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 0,
-			"id" : "wps_autogen::@6890427a1f51a3e7e1df"
+			"id" : "wps_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		},
 		{
-			"id" : "wps_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+			"backtrace" : 0,
+			"id" : "wps_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "wps::@6890427a1f51a3e7e1df",
@@ -450,31 +446,31 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /O2 /Ob2 /DNDEBUG -MD",
+				"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd",
 				"role" : "flags"
 			},
 			{
-				"fragment" : "/machine:x64 /INCREMENTAL:NO /subsystem:windows",
+				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:windows",
 				"role" : "flags"
 			},
 			{
 				"backtrace" : 6,
-				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6PrintSupport.lib",
+				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6PrintSupportd.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 7,
-				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6Widgets.lib",
+				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6Widgetsd.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 14,
-				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6Gui.lib",
+				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6Guid.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 15,
-				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6Core.lib",
+				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6Cored.lib",
 				"role" : "libraries"
 			},
 			{
@@ -489,7 +485,7 @@
 			},
 			{
 				"backtrace" : 33,
-				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6EntryPoint.lib",
+				"fragment" : "C:\\Qt\\6.7.3\\msvc2022_64\\lib\\Qt6EntryPointd.lib",
 				"role" : "libraries"
 			},
 			{
@@ -585,7 +581,7 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/wps_autogen/mocs_compilation_Release.cpp",
+			"path" : "build/wps_autogen/mocs_compilation_Debug.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -629,7 +625,7 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/wps_autogen/include_Release/src/mainwindow/ui_mainwindow.h",
+			"path" : "build/wps_autogen/include_Debug/src/mainwindow/ui_mainwindow.h",
 			"sourceGroupIndex" : 1
 		},
 		{
