@@ -18,7 +18,21 @@ int main(int argc, char *argv[])
         }
     }
     MainWindow w;
-    w.setWindowState(Qt::WindowMaximized);
+    //w.setWindowState(Qt::WindowMaximized);
     w.show();
     return a.exec();
 }
+
+/*
+// Create the ScribbleArea widget and make it
+    // the central widget
+    scribbleArea = new ScribbleArea;
+    setCentralWidget(scribbleArea);
+
+    // Create actions and menus
+    createActions();
+    createMenus();
+
+    // Set the title
+    setWindowTitle(tr("Scribble"));
+*/

@@ -317,6 +317,17 @@
 		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsVersionlessTargets.cmake",
 		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake",
 		"C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeParseArguments.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportConfigVersion.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportConfigVersionImpl.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportConfig.cmake",
+		"C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportDependencies.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportTargets.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportTargets-debug.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportTargets-relwithdebinfo.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportAdditionalTargetInfo.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportVersionlessTargets.cmake",
+		"C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6PrintSupport/Qt6PrintSupportPlugins.cmake",
 		"C:/Program Files/CMake/share/cmake-3.30/Modules/GNUInstallDirs.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "C:/Proj/wps",
@@ -329,6 +340,12 @@
 			"C:/Proj/wps/src/mainwindow/mainwindow.h",
 			"MU",
 			"GFTB6AWTXV/moc_mainwindow.cpp",
+			null
+		],
+		[
+			"C:/Proj/wps/src/mainwindow/scribblearea.h",
+			"MU",
+			"GFTB6AWTXV/moc_scribblearea.cpp",
 			null
 		]
 	],
@@ -346,6 +363,7 @@
 	[
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
+		"QT_PRINTSUPPORT_LIB",
 		"QT_WIDGETS_LIB",
 		"UNICODE",
 		"WIN32",
@@ -359,6 +377,7 @@
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
 		"QT_NO_DEBUG",
+		"QT_PRINTSUPPORT_LIB",
 		"QT_WIDGETS_LIB",
 		"UNICODE",
 		"WIN32",
@@ -372,6 +391,7 @@
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
 		"QT_NO_DEBUG",
+		"QT_PRINTSUPPORT_LIB",
 		"QT_WIDGETS_LIB",
 		"UNICODE",
 		"WIN32",
@@ -394,7 +414,8 @@
 		"C:/Qt/6.7.3/msvc2022_64/include",
 		"C:/Qt/6.7.3/msvc2022_64/mkspecs/win32-msvc",
 		"C:/Qt/6.7.3/msvc2022_64/include/QtWidgets",
-		"C:/Qt/6.7.3/msvc2022_64/include/QtGui"
+		"C:/Qt/6.7.3/msvc2022_64/include/QtGui",
+		"C:/Qt/6.7.3/msvc2022_64/include/QtPrintSupport"
 	],
 	"MOC_INCLUDES_RelWithDebInfo" : 
 	[
@@ -402,7 +423,8 @@
 		"C:/Qt/6.7.3/msvc2022_64/include",
 		"C:/Qt/6.7.3/msvc2022_64/mkspecs/win32-msvc",
 		"C:/Qt/6.7.3/msvc2022_64/include/QtWidgets",
-		"C:/Qt/6.7.3/msvc2022_64/include/QtGui"
+		"C:/Qt/6.7.3/msvc2022_64/include/QtGui",
+		"C:/Qt/6.7.3/msvc2022_64/include/QtPrintSupport"
 	],
 	"MOC_INCLUDES_Release" : 
 	[
@@ -410,7 +432,8 @@
 		"C:/Qt/6.7.3/msvc2022_64/include",
 		"C:/Qt/6.7.3/msvc2022_64/mkspecs/win32-msvc",
 		"C:/Qt/6.7.3/msvc2022_64/include/QtWidgets",
-		"C:/Qt/6.7.3/msvc2022_64/include/QtGui"
+		"C:/Qt/6.7.3/msvc2022_64/include/QtGui",
+		"C:/Qt/6.7.3/msvc2022_64/include/QtPrintSupport"
 	],
 	"MOC_MACRO_NAMES" : 
 	[
@@ -444,7 +467,8 @@
 	"SOURCES" : 
 	[
 		[ "C:/Proj/wps/src/main.cpp", "MU", null ],
-		[ "C:/Proj/wps/src/mainwindow/mainwindow.cpp", "MU", null ]
+		[ "C:/Proj/wps/src/mainwindow/mainwindow.cpp", "MU", null ],
+		[ "C:/Proj/wps/src/mainwindow/scribblearea.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],
