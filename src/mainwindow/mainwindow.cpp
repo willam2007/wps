@@ -256,12 +256,26 @@ void MainWindow::on_create_button_project_clicked()
     // Create actions and menus
     createActions();
     createMenus();
-
-    // Set the title
-    setWindowTitle(tr("Scribble"));
 }
 
 void MainWindow::on_choose_button_project_clicked()
 {
+    // Get the file to open from a dialog
+    // tr sets the window title to Open File
+    // QDir opens the current dirctory
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Open File"), QDir::currentPath());
 
+    // If we have a file name load the image and place
+    // it in the scribbleArea
+    if (!fileName.isEmpty()) {
+        // the central widget
+        scribbleArea = new ScribbleArea;
+        setCentralWidget(scribbleArea);
+        setWindowState(Qt::WindowMaximized);
+        // Create actions and menus
+        createActions();
+        createMenus();
+        scribbleArea->openImage(fileName);
+    }
 }
