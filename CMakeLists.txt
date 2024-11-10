@@ -20,14 +20,17 @@ set(PROJECT_SOURCES
     #src files
         src/main.cpp
         src/mainwindow/mainwindow.cpp
-        src/mainwindow/scribblearea.cpp
+        src/area/scribblearea.cpp
+        src/canvas/canvas.cpp
 
     #headers files
         src/mainwindow/mainwindow.h
-        src/mainwindow/scribblearea.h
+        src/area/scribblearea.h
+        src/canvas/canvas.h
     
     #ui files
         src/mainwindow/mainwindow.ui
+        src/canvas/canvas.ui
 
     ${TS_FILES}
 )

@@ -1,54 +1,22 @@
 #include <QtWidgets>
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
-#include "scribblearea.h"
+#include "../area/scribblearea.h"
+#include "../canvas/canvas.h"
 
 // MainWindow constructor
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow)  // Инициализируем объект Ui::MainWindow
 {
+    setAttribute(Qt::WA_StaticContents);
     ui->setupUi(this);  // Настраиваем интерфейс из файла .ui
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-// User tried to close the app
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-    // If they try to close maybeSave() returns true
-    // if no changes have been made and the app closes
-    if (maybeSave()) {
-        event->accept();
-    } else {
-
-        // If there have been changes ignore the event
-        event->ignore();
-    }
-}
-
-// Check if the current image has been changed and then
-// open a dialog to open a file
-void MainWindow::open()
-{
-    // Check if changes have been made since last save
-    // maybeSave() returns true if no changes have been made
-    if (maybeSave()) {
-
-        // Get the file to open from a dialog
-        // tr sets the window title to Open File
-        // QDir opens the current dirctory
-        QString fileName = QFileDialog::getOpenFileName(this,
-                                                        tr("Open File"), QDir::currentPath());
-
-        // If we have a file name load the image and place
-        // it in the scribbleArea
-        if (!fileName.isEmpty())
-            scribbleArea->openImage(fileName);
-    }
 }
 
 // Called when the user clicks Save As in the menu
@@ -249,33 +217,21 @@ bool MainWindow::saveFile(const QByteArray &fileFormat)
 
 void MainWindow::on_create_button_project_clicked()
 {
-    // the central widget
-    scribbleArea = new ScribbleArea;
-    setCentralWidget(scribbleArea);
-    setWindowState(Qt::WindowMaximized);
-    // Create actions and menus
-    createActions();
-    createMenus();
+
+    canvas = new Canvas();
+    canvas->show();
+    this->hide();
+    //setCentralWidget(canvas);
+    canvas->setWindowState(Qt::WindowMaximized);
 }
 
 void MainWindow::on_choose_button_project_clicked()
 {
-    // Get the file to open from a dialog
-    // tr sets the window title to Open File
-    // QDir opens the current dirctory
-    QString fileName = QFileDialog::getOpenFileName(this,
-                                                    tr("Open File"), QDir::currentPath());
+    canvas = new Canvas();
+    canvas->openIm();
+    canvas->show();
+    this->hide();
+    //setCentralWidget(canvas);
+    canvas->setWindowState(Qt::WindowMaximized);
 
-    // If we have a file name load the image and place
-    // it in the scribbleArea
-    if (!fileName.isEmpty()) {
-        // the central widget
-        scribbleArea = new ScribbleArea;
-        setCentralWidget(scribbleArea);
-        setWindowState(Qt::WindowMaximized);
-        // Create actions and menus
-        createActions();
-        createMenus();
-        scribbleArea->openImage(fileName);
-    }
 }
