@@ -1,4 +1,5 @@
 C:/Proj/wps/build/wps_autogen/include_Debug/GFTB6AWTXV/moc_mainwindow.cpp: C:/Proj/wps/src/mainwindow/mainwindow.h \
+  C:/Qt/6.7.3/msvc2022_64/include/QtCore/QList \
   C:/Qt/6.7.3/msvc2022_64/include/QtCore/q20functional.h \
   C:/Qt/6.7.3/msvc2022_64/include/QtCore/q20memory.h \
   C:/Qt/6.7.3/msvc2022_64/include/QtCore/q20type_traits.h \
