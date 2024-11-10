@@ -337,15 +337,21 @@
 	"HEADERS" : 
 	[
 		[
-			"C:/Proj/wps/src/mainwindow/mainwindow.h",
+			"C:/Proj/wps/src/area/scribblearea.h",
 			"MU",
-			"GFTB6AWTXV/moc_mainwindow.cpp",
+			"4UQ2DM6HXH/moc_scribblearea.cpp",
 			null
 		],
 		[
-			"C:/Proj/wps/src/mainwindow/scribblearea.h",
+			"C:/Proj/wps/src/canvas/canvas.h",
 			"MU",
-			"GFTB6AWTXV/moc_scribblearea.cpp",
+			"SXBUF2WVFU/moc_canvas.cpp",
+			null
+		],
+		[
+			"C:/Proj/wps/src/mainwindow/mainwindow.h",
+			"MU",
+			"GFTB6AWTXV/moc_mainwindow.cpp",
 			null
 		]
 	],
@@ -466,9 +472,10 @@
 	"SETTINGS_FILE_Release" : "C:/Proj/wps/build/CMakeFiles/wps_autogen.dir/AutogenUsed_Release.txt",
 	"SOURCES" : 
 	[
+		[ "C:/Proj/wps/src/area/scribblearea.cpp", "MU", null ],
+		[ "C:/Proj/wps/src/canvas/canvas.cpp", "MU", null ],
 		[ "C:/Proj/wps/src/main.cpp", "MU", null ],
-		[ "C:/Proj/wps/src/mainwindow/mainwindow.cpp", "MU", null ],
-		[ "C:/Proj/wps/src/mainwindow/scribblearea.cpp", "MU", null ]
+		[ "C:/Proj/wps/src/mainwindow/mainwindow.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

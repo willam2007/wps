@@ -1,5 +1,5 @@
 #include "mainwindow/mainwindow.h"
-
+#include "canvas/canvas.h"
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    system("chcp 65001");
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
@@ -18,21 +18,11 @@ int main(int argc, char *argv[])
         }
     }
     MainWindow w;
+    Canvas c;
+    w.resize(280, 215);
     //w.setWindowState(Qt::WindowMaximized);
     w.show();
+    //c.show();
+
     return a.exec();
 }
-
-/*
-// Create the ScribbleArea widget and make it
-    // the central widget
-    scribbleArea = new ScribbleArea;
-    setCentralWidget(scribbleArea);
-
-    // Create actions and menus
-    createActions();
-    createMenus();
-
-    // Set the title
-    setWindowTitle(tr("Scribble"));
-*/

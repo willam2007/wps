@@ -12,7 +12,7 @@ QT_END_NAMESPACE
 
 // ScribbleArea used to paint the image
 class ScribbleArea;
-
+class Canvas;
 
 
 class MainWindow : public QMainWindow
@@ -27,12 +27,8 @@ public:
     ~MainWindow();
 
 protected:
-    // Function used to close an event
-    void closeEvent(QCloseEvent *event) override;
-
     // The events that can be triggered
 private slots:
-    void open();
     void save();
     void penColor();
     void penWidth();
@@ -40,9 +36,6 @@ private slots:
 
     void on_create_button_project_clicked();
     void on_choose_button_project_clicked();
-
-
-
 
 private:
     Ui::MainWindow *ui;
@@ -59,6 +52,7 @@ private:
 
     // What we'll draw on
     ScribbleArea *scribbleArea;
+    Canvas *canvas;
 
     // The menu widgets
     QMenu *saveAsMenu;

@@ -48,14 +48,17 @@ set(OLD_GLOB
   "C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/EWIEGA46WW/moc_mainwindow.cpp"
   "C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/K6S233IZAZ/moc_mainwindow.cpp"
   "C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/mocs_compilation.cpp"
+  "C:/Proj/wps/build/wps_autogen/include_Debug/4UQ2DM6HXH/moc_scribblearea.cpp"
   "C:/Proj/wps/build/wps_autogen/include_Debug/EWIEGA46WW/moc_mainwindow.cpp"
   "C:/Proj/wps/build/wps_autogen/include_Debug/GFTB6AWTXV/moc_mainwindow.cpp"
   "C:/Proj/wps/build/wps_autogen/include_Debug/GFTB6AWTXV/moc_scribblearea.cpp"
   "C:/Proj/wps/build/wps_autogen/include_Debug/K6S233IZAZ/moc_mainwindow.cpp"
+  "C:/Proj/wps/build/wps_autogen/include_Debug/SXBUF2WVFU/moc_canvas.cpp"
   "C:/Proj/wps/build/wps_autogen/mocs_compilation_Debug.cpp"
+  "C:/Proj/wps/src/area/scribblearea.cpp"
+  "C:/Proj/wps/src/canvas/canvas.cpp"
   "C:/Proj/wps/src/main.cpp"
   "C:/Proj/wps/src/mainwindow/mainwindow.cpp"
-  "C:/Proj/wps/src/mainwindow/scribblearea.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -77,9 +80,11 @@ set(OLD_GLOB
   "C:/Proj/wps/build/CMakeFiles/ShowIncludes/foo.h"
   "C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/CMakeFiles/ShowIncludes/foo.h"
   "C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps_autogen/include/ui_mainwindow.h"
+  "C:/Proj/wps/build/wps_autogen/include_Debug/ui_canvas.h"
   "C:/Proj/wps/build/wps_autogen/include_Debug/ui_mainwindow.h"
+  "C:/Proj/wps/src/area/scribblearea.h"
+  "C:/Proj/wps/src/canvas/canvas.h"
   "C:/Proj/wps/src/mainwindow/mainwindow.h"
-  "C:/Proj/wps/src/mainwindow/scribblearea.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -179,6 +184,7 @@ endif()
 # _directory_contents at C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Proj/wps/*.ui")
 set(OLD_GLOB
+  "C:/Proj/wps/src/canvas/canvas.ui"
   "C:/Proj/wps/src/mainwindow/mainwindow.ui"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
