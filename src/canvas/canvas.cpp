@@ -1,6 +1,7 @@
 #include "canvas.h"
 #include "ui_canvas.h"
 #include "../area/scribblearea.h"
+
 #include <qboxlayout.h>
 #include <qpainter.h>
 #include <QtWidgets>
@@ -9,7 +10,7 @@ Canvas::Canvas(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Canvas)
 {
-    setAttribute(Qt::WA_StaticContents); // Устанавливаем статическое содержимое
+    //setAttribute(Qt::WA_StaticContents); // Устанавливаем статическое содержимое
     ui->setupUi(this); // Настраиваем интерфейс из файла .ui
     scribbleArea = new ScribbleArea(this); // Создаем область для рисования
     QVBoxLayout *layout = new QVBoxLayout(ui->canvas_space); // Устанавливаем вертикальный компоновщик в canvas_space
@@ -17,28 +18,6 @@ Canvas::Canvas(QWidget *parent)
 
     // Задаем стиль для canvas_space
     ui->canvas_space->setStyleSheet("border: 2px solid black; border-radius: 10px; background-color: lightgray;");
-
-    /*
-    // Создаем кнопки "Draw" и "Select"
-    QPushButton *drawButton = new QPushButton("Draw", this);
-    QPushButton *selectButton = new QPushButton("Select", this);
-
-    // Привязываем действия к кнопкам
-    connect(drawButton, &QPushButton::clicked, this, [this]() {
-        scribbleArea->setMode(ScribbleArea::Drawing); // Устанавливаем режим рисования
-    });
-    connect(selectButton, &QPushButton::clicked, this, [this]() {
-        scribbleArea->setMode(ScribbleArea::Selecting); // Устанавливаем режим выделения
-    });
-
-    layout->addWidget(drawButton); // Добавляем кнопку "Draw" в компоновщик
-    layout->addWidget(selectButton); // Добавляем кнопку "Select" в компоновщик
-    */
-}
-
-Canvas::~Canvas()
-{
-    delete ui; // Удаляем интерфейсный объект
 }
 
 // Пользователь пытается закрыть приложение
@@ -51,6 +30,41 @@ void Canvas::closeEvent(QCloseEvent *event)
         // Если были несохраненные изменения, отменяем закрытие
         event->ignore();
     }
+}
+
+// Открывает диалог для изменения цвета пера
+void Canvas::penColor()
+{
+    // Сохраняем выбранный цвет из диалога
+    QColor newColor = QColorDialog::getColor(scribbleArea->penColor());
+
+    // Если цвет валиден, устанавливаем его
+    if (newColor.isValid())
+        scribbleArea->setPenColor(newColor);
+}
+
+// Открывает диалог "О программе"
+void Canvas::about()
+{
+    // Заголовок окна и текст для отображения
+    QMessageBox::about(this, tr("О WPS"),
+                       tr("<p>На этом этапе все делал Артём. Какой он молодец</p>"));
+}
+
+// Открывает диалог для изменения толщины пера
+void Canvas::penWidth()
+{
+    bool ok; // Переменная для проверки, нажата ли кнопка OK
+
+    // Создаем диалог выбора толщины пера
+    int newWidth = QInputDialog::getInt(this, tr("Scribble"),
+                                        tr("Выберите толщину пера:"),
+                                        scribbleArea->penWidth(),
+                                        1, 50, 1, &ok);
+
+    // Устанавливаем толщину пера, если OK нажата
+    if (ok)
+        scribbleArea->setPenWidth(newWidth);
 }
 
 // Функция для открытия изображения
@@ -121,30 +135,3 @@ bool Canvas::saveFile(const QByteArray &fileFormat)
         return scribbleArea->saveImage(fileName, fileFormat.constData());
     }
 }
-
-// Получаем размер canvas_space
-QSize Canvas::getCanvasSpaceSize() const
-{
-    return ui->canvas_space->size();
-}
-
-// Триггер для открытия изображения через кнопку
-void Canvas::on_open_button_canvas_triggered()
-{
-    this->openIm(); // Вызываем openIm() для открытия файла
-}
-
-bool Canvas::on_save_button_canvas_triggered()
-{
-    return saveFile("png");
-}
-
-void Canvas::on_actionPen_triggered()
-{
-    scribbleArea->setMode(ScribbleArea::Drawing);
-}
-
-void Canvas::on_actionSelecting_triggered()
-{
-    scribbleArea->setMode(ScribbleArea::Selecting);
-}    

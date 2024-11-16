@@ -1,3 +1,5 @@
+#include "scribblearea.h"
+
 #include <QtWidgets>
 #include <QDir>
 #if defined(QT_PRINTSUPPORT_LIB)
@@ -7,8 +9,6 @@
 #include <QPrintDialog>
 #endif
 #endif
-
-#include "scribblearea.h"
 
 ScribbleArea::ScribbleArea(QWidget *parent)
     : QWidget(parent)
@@ -40,7 +40,6 @@ bool ScribbleArea::openImage(const QString &fileName, const QSize &targetSize)
     update();
     return true;
 }
-
 
 // Сохранение текущего изображения
 bool ScribbleArea::saveImage(const QString &fileName, const char *fileFormat)
