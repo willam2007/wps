@@ -10,16 +10,15 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-// ScribbleArea used to paint the image
+// ScribbleArea используется для рисования изображения
 class ScribbleArea;
 class Canvas;
 
-
 class MainWindow : public QMainWindow
 {
-    // Declares our class as a QObject which is the base class
-    // for all Qt objects
-    // QObjects handle events
+    // Объявляет наш класс как QObject, который является базовым
+    // классом для всех объектов Qt
+    // QObjects обрабатывают события
     Q_OBJECT
 
 public:
@@ -27,51 +26,20 @@ public:
     ~MainWindow();
 
 protected:
-    // The events that can be triggered
-private slots:
-    void save();
-    void penColor();
-    void penWidth();
-    void about();
+    // События, которые могут быть вызваны
+private slots:              // Сохранение
+    void penColor();            // Изменение цвета пера
+    void penWidth();            // Изменение толщины пера
+    void about();               // Отображение информации о программе
 
-    void on_create_button_project_clicked();
-    void on_choose_button_project_clicked();
+    void on_create_button_project_clicked();  // Обработчик нажатия кнопки создания проекта
+    void on_choose_button_project_clicked();  // Обработчик нажатия кнопки выбора проекта
 
 private:
     Ui::MainWindow *ui;
-
-    // Will tie user actions to functions
-    void createActions();
-    void createMenus();
-
-    // Will check if changes have occurred since last save
-    bool maybeSave();
-
-    // Opens the Save dialog and saves
-    bool saveFile(const QByteArray &fileFormat);
-
-    // What we'll draw on
+    // Поле для рисования
     ScribbleArea *scribbleArea;
     Canvas *canvas;
-
-    // The menu widgets
-    QMenu *saveAsMenu;
-    QMenu *fileMenu;
-    QMenu *optionMenu;
-    QMenu *helpMenu;
-
-    // All the actions that can occur
-    QAction *openAct;
-
-    // Actions tied to specific file formats
-    QList<QAction *> saveAsActs;
-    QAction *exitAct;
-    QAction *penColorAct;
-    QAction *penWidthAct;
-    QAction *printAct;
-    QAction *clearScreenAct;
-    QAction *aboutAct;
-    QAction *aboutQtAct;
 };
 
 #endif

@@ -26,7 +26,9 @@ public:
 
 private slots:
     void on_open_button_canvas_triggered();
-
+    bool on_save_button_canvas_triggered();
+    void on_actionPen_triggered();
+    void on_actionSelecting_triggered();    
 
 private:
     Ui::Canvas *ui;

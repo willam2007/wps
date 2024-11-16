@@ -3,235 +3,74 @@
 #include "mainwindow.h"
 #include "../area/scribblearea.h"
 #include "../canvas/canvas.h"
+#include <QDebug>
 
-// MainWindow constructor
+// Конструктор MainWindow
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow)  // Инициализируем объект Ui::MainWindow
 {
-    setAttribute(Qt::WA_StaticContents);
+    setAttribute(Qt::WA_StaticContents); // Устанавливаем атрибут статического содержимого
     ui->setupUi(this);  // Настраиваем интерфейс из файла .ui
-
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete ui; // Удаляем интерфейс, чтобы освободить память
 }
 
-// Called when the user clicks Save As in the menu
-void MainWindow::save()
-{
-    // A QAction represents the action of the user clicking
-    QAction *action = qobject_cast<QAction *>(sender());
-
-    // Stores the array of bytes of the users data
-    QByteArray fileFormat = action->data().toByteArray();
-
-    // Pass it to be saved
-    saveFile(fileFormat);
-}
-
-// Opens a dialog to change the pen color
+// Открывает диалог для изменения цвета пера
 void MainWindow::penColor()
 {
-    // Store the chosen color from the dialog
+    // Сохраняем выбранный цвет из диалога
     QColor newColor = QColorDialog::getColor(scribbleArea->penColor());
 
-    // If a valid color set it
+    // Если цвет валиден, устанавливаем его
     if (newColor.isValid())
         scribbleArea->setPenColor(newColor);
 }
 
-// Opens a dialog that allows the user to change the pen width
+// Открывает диалог для изменения толщины пера
 void MainWindow::penWidth()
 {
-    // Stores button value
-    bool ok;
+    bool ok; // Переменная для проверки, нажата ли кнопка OK
 
-    // tr("Scribble") is the title
-    // the next tr is the text to display
-    // Get the current pen width
-    // Define the min, max, step and ok button
+    // Создаем диалог выбора толщины пера
     int newWidth = QInputDialog::getInt(this, tr("Scribble"),
-                                        tr("Select pen width:"),
+                                        tr("Выберите толщину пера:"),
                                         scribbleArea->penWidth(),
                                         1, 50, 1, &ok);
-    // Change the pen width
+
+    // Устанавливаем толщину пера, если OK нажата
     if (ok)
         scribbleArea->setPenWidth(newWidth);
 }
 
-// Open an about dialog
+// Открывает диалог "О программе"
 void MainWindow::about()
 {
-    // Window title and text to display
-    QMessageBox::about(this, tr("About Scribble"),
-                       tr("<p>The <b>Scribble</b> example is awesome</p>"));
+    // Заголовок окна и текст для отображения
+    QMessageBox::about(this, tr("О Scribble"),
+                       tr("<p>Пример <b>Scribble</b> великолепен</p>"));
 }
 
-// Define menu actions that call functions
-void MainWindow::createActions()
-{
-    // Create the action tied to the menu
-    openAct = new QAction(tr("&Open..."), this);
-
-    // Define the associated shortcut key
-    openAct->setShortcuts(QKeySequence::Open);
-
-    // Tie the action to MainWindow::open()
-    connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
-
-    // Get a list of the supported file formats
-    // QImageWriter is used to write images to files
-    foreach (QByteArray format, QImageWriter::supportedImageFormats()) {
-        QString text = tr("%1...").arg(QString(format).toUpper());
-
-        // Create an action for each file format
-        QAction *action = new QAction(text, this);
-
-        // Set an action for each file format
-        action->setData(format);
-
-        // When clicked call MainWindow::save()
-        connect(action, SIGNAL(triggered()), this, SLOT(save()));
-
-        // Attach each file format option menu item to Save As
-        saveAsActs.append(action);
-    }
-
-    // Create print action and tie to MainWindow::print()
-    printAct = new QAction(tr("&Print..."), this);
-    connect(printAct, SIGNAL(triggered()), scribbleArea, SLOT(print()));
-
-    // Create exit action and tie to MainWindow::close()
-    exitAct = new QAction(tr("E&xit"), this);
-    exitAct->setShortcuts(QKeySequence::Quit);
-    connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
-
-    // Create pen color action and tie to MainWindow::penColor()
-    penColorAct = new QAction(tr("&Pen Color..."), this);
-    connect(penColorAct, SIGNAL(triggered()), this, SLOT(penColor()));
-
-    // Create pen width action and tie to MainWindow::penWidth()
-    penWidthAct = new QAction(tr("Pen &Width..."), this);
-    connect(penWidthAct, SIGNAL(triggered()), this, SLOT(penWidth()));
-
-    // Create clear screen action and tie to MainWindow::clearImage()
-    clearScreenAct = new QAction(tr("&Clear Screen"), this);
-    clearScreenAct->setShortcut(tr("Ctrl+L"));
-    connect(clearScreenAct, SIGNAL(triggered()),
-            scribbleArea, SLOT(clearImage()));
-
-    // Create about action and tie to MainWindow::about()
-    aboutAct = new QAction(tr("&About"), this);
-    connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
-
-    // Create about Qt action and tie to MainWindow::aboutQt()
-    aboutQtAct = new QAction(tr("About &Qt"), this);
-    connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-}
-
-// Create the menubar
-void MainWindow::createMenus()
-{
-    // Create Save As option and the list of file types
-    saveAsMenu = new QMenu(tr("&Save As"), this);
-    foreach (QAction *action, saveAsActs)
-        saveAsMenu->addAction(action);
-
-    // Attach all actions to File
-    fileMenu = new QMenu(tr("&File"), this);
-    fileMenu->addAction(openAct);
-    fileMenu->addMenu(saveAsMenu);
-    fileMenu->addAction(printAct);
-    fileMenu->addSeparator();
-    fileMenu->addAction(exitAct);
-
-    // Attach all actions to Options
-    optionMenu = new QMenu(tr("&Options"), this);
-    optionMenu->addAction(penColorAct);
-    optionMenu->addAction(penWidthAct);
-    optionMenu->addSeparator();
-    optionMenu->addAction(clearScreenAct);
-
-    // Attach all actions to Help
-    helpMenu = new QMenu(tr("&Help"), this);
-    helpMenu->addAction(aboutAct);
-    helpMenu->addAction(aboutQtAct);
-
-    // Add menu items to the menubar
-    menuBar()->addMenu(fileMenu);
-    menuBar()->addMenu(optionMenu);
-    menuBar()->addMenu(helpMenu);
-}
-
-bool MainWindow::maybeSave()
-{
-    // Check for changes since last save
-    if (scribbleArea->isModified()) {
-        QMessageBox::StandardButton ret;
-
-        // Scribble is the title
-        // Add text and the buttons
-        ret = QMessageBox::warning(this, tr("Scribble"),
-                                   tr("The image has been modified.\n"
-                                      "Do you want to save your changes?"),
-                                   QMessageBox::Save | QMessageBox::Discard
-                                       | QMessageBox::Cancel);
-
-        // If save button clicked call for file to be saved
-        if (ret == QMessageBox::Save) {
-            return saveFile("png");
-
-            // If cancel do nothing
-        } else if (ret == QMessageBox::Cancel) {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool MainWindow::saveFile(const QByteArray &fileFormat)
-{
-    // Define path, name and default file type
-    QString initialPath = QDir::currentPath() + "/untitled." + fileFormat;
-
-    // Get selected file from dialog
-    // Add the proper file formats and extensions
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),
-                                                    initialPath,
-                                                    tr("%1 Files (*.%2);;All Files (*)")
-                                                        .arg(QString::fromLatin1(fileFormat.toUpper()))
-                                                        .arg(QString::fromLatin1(fileFormat)));
-
-    // If no file do nothing
-    if (fileName.isEmpty()) {
-        return false;
-    } else {
-
-        // Call for the file to be saved
-        return scribbleArea->saveImage(fileName, fileFormat.constData());
-    }
-}
-
+// Обработчик нажатия кнопки "Создать проект"
 void MainWindow::on_create_button_project_clicked()
 {
-
     canvas = new Canvas();
-    canvas->show();
-    this->hide();
-    //setCentralWidget(canvas);
     canvas->setWindowState(Qt::WindowMaximized);
+    canvas->setFixedSize(1920, 1080);
+    canvas->show();
+    this->hide();   
 }
 
+// Обработчик нажатия кнопки "Выбрать проект"
 void MainWindow::on_choose_button_project_clicked()
 {
     canvas = new Canvas();
     canvas->openIm();
+    canvas->setWindowState(Qt::WindowMaximized);
+    canvas->setFixedSize(1920, 1080); 
     canvas->show();
     this->hide();
-    //setCentralWidget(canvas);
-    canvas->setWindowState(Qt::WindowMaximized);
-
 }
