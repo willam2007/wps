@@ -10,17 +10,17 @@ build install: phony install$:Debug
 
 build install\local: phony install\local$:Debug
 
-build wps: phony Debug\wps.exe
+build qqeeeee: phony Debug\qqeeeee.exe
 
-build wps.exe: phony Debug\wps.exe
+build qqeeeee.exe: phony Debug\qqeeeee.exe
 
-build wps_autogen: phony wps_autogen$:Debug
+build qqeeeee_autogen: phony qqeeeee_autogen$:Debug
 
-build wps_autogen_timestamp_deps: phony wps_autogen_timestamp_deps$:Debug
+build qqeeeee_autogen_timestamp_deps: phony qqeeeee_autogen_timestamp_deps$:Debug
 
 
 #############################################
-# Folder: C:/Proj/wps/build
+# Folder: C:/Proj/qqeeeee/build
 
 build all: phony all$:Debug
 

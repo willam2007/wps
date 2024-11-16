@@ -1,3 +1,19 @@
 {
-    "C_Cpp.errorSquiggles": "disabled"
+    "files.associations": {
+        "*.cpp": "cpp",
+        "array": "cpp",
+        "chrono": "cpp",
+        "filesystem": "cpp",
+        "format": "cpp",
+        "forward_list": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "span": "cpp",
+        "vector": "cpp",
+        "xhash": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp",
+        "xlocale": "cpp"
+    }
 }

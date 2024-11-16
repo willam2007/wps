@@ -10,17 +10,17 @@ build install: phony install$:RelWithDebInfo
 
 build install\local: phony install\local$:RelWithDebInfo
 
-build wps: phony RelWithDebInfo\wps.exe
+build qqeeeee: phony RelWithDebInfo\qqeeeee.exe
 
-build wps.exe: phony RelWithDebInfo\wps.exe
+build qqeeeee.exe: phony RelWithDebInfo\qqeeeee.exe
 
-build wps_autogen: phony wps_autogen$:RelWithDebInfo
+build qqeeeee_autogen: phony qqeeeee_autogen$:RelWithDebInfo
 
-build wps_autogen_timestamp_deps: phony wps_autogen_timestamp_deps$:RelWithDebInfo
+build qqeeeee_autogen_timestamp_deps: phony qqeeeee_autogen_timestamp_deps$:RelWithDebInfo
 
 
 #############################################
-# Folder: C:/Proj/wps/build
+# Folder: C:/Proj/qqeeeee/build
 
 build all: phony all$:RelWithDebInfo
 

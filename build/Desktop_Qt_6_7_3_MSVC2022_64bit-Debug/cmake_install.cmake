@@ -1,8 +1,8 @@
-# Install script for directory: C:/Proj/wps
+# Install script for directory: C:/Proj/qqeeeee
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/wps")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/qqeeeee")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,7 +33,7 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/wps.exe")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "C:/Proj/qqeeeee/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/qqeeeee.exe")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -44,5 +44,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Proj/wps/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Proj/qqeeeee/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
