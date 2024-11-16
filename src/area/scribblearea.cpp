@@ -13,9 +13,7 @@
 ScribbleArea::ScribbleArea(QWidget *parent)
     : QWidget(parent)
 {
-    // Roots the widget to the top left even if resized
-
-    // Set defaults for the monitored variables
+    // Устанавливаем значения по умолчанию для отслеживаемых переменных
     modified = false;
     scribbling = false;
     selecting = false;
@@ -44,10 +42,10 @@ bool ScribbleArea::openImage(const QString &fileName, const QSize &targetSize)
 }
 
 
-// Save the current image
+// Сохранение текущего изображения
 bool ScribbleArea::saveImage(const QString &fileName, const char *fileFormat)
 {
-    // Created to hold the image
+    // Создаем изображение для сохранения
     QImage visibleImage = image;
     resizeImage(&visibleImage, size());
 
@@ -59,19 +57,19 @@ bool ScribbleArea::saveImage(const QString &fileName, const char *fileFormat)
     }
 }
 
-// Used to change the pen color
+// Изменение цвета пера
 void ScribbleArea::setPenColor(const QColor &newColor)
 {
     myPenColor = newColor;
 }
 
-// Used to change the pen width
+// Изменение ширины пера
 void ScribbleArea::setPenWidth(int newWidth)
 {
     myPenWidth = newWidth;
 }
 
-// Color the image area with white
+// Заливка изображения белым цветом
 void ScribbleArea::clearImage()
 {
     image.fill(qRgb(255, 55, 255));
@@ -79,9 +77,8 @@ void ScribbleArea::clearImage()
     update();
 }
 
-// If a mouse button is pressed check if it was the
-// left button and if so store the current position
-// Set that we are currently drawing
+// При нажатии кнопки мыши проверяем, была ли нажата левая кнопка,
+// и если да, сохраняем текущую позицию и начинаем рисование
 void ScribbleArea::mousePressEvent(QMouseEvent *event) {
     if (currentMode == Inactive) {
         return;
@@ -98,9 +95,8 @@ void ScribbleArea::mousePressEvent(QMouseEvent *event) {
     }
 }
 
-// When the mouse moves if the left button is clicked
-// we call the drawline function which draws a line
-// from the last position to the current
+// При движении мыши с нажатой левой кнопкой вызываем функцию рисования,
+// которая рисует линию от последней позиции до текущей
 void ScribbleArea::mouseMoveEvent(QMouseEvent *event) {
     if ((event->buttons() & Qt::LeftButton)) {
         if (currentMode == Drawing && scribbling) {
@@ -112,7 +108,7 @@ void ScribbleArea::mouseMoveEvent(QMouseEvent *event) {
     }
 }
 
-// If the button is released we set variables to stop drawing
+// При отпускании кнопки мыши прекращаем рисование
 void ScribbleArea::mouseReleaseEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         if (currentMode == Drawing && scribbling) {
@@ -133,9 +129,8 @@ bool ScribbleArea::isModified() const
     return modified;
 }
 
-// QPainter provides functions to draw on the widget
-// The QPaintEvent is sent to widgets that need to
-// update themselves
+// QPainter предоставляет функции для рисования на виджете
+// Событие QPaintEvent отправляется виджетам, которым нужно обновиться
 void ScribbleArea::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     QRect dirtyRect = event->rect();
@@ -147,8 +142,6 @@ void ScribbleArea::paintEvent(QPaintEvent *event) {
     }
 }
 
-// Resize the image to slightly larger then the main window
-// to cut down on the need to resize the image
 void ScribbleArea::resizeEvent(QResizeEvent *event)
 {
     if (width() > image.width() || height() > image.height()) {
@@ -162,42 +155,43 @@ void ScribbleArea::resizeEvent(QResizeEvent *event)
 
 void ScribbleArea::drawLineTo(const QPoint &endPoint)
 {
-    // Used to draw on the widget
+    // Функция для рисования на виджете
     QPainter painter(&image);
 
-    // Set the current settings for the pen
+    // Устанавливаем текущие настройки для пера
     painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
                         Qt::RoundJoin));
 
-    // Draw a line from the last registered point to the current
+    // Рисуем линию от последней зафиксированной точки до текущей
     painter.drawLine(lastPoint, endPoint);
 
-    // Set that the image hasn't been saved
+    // Отмечаем, что изображение не сохранено
     modified = true;
 
     int rad = (myPenWidth / 2) + 2;
 
-    // Call to update the rectangular space where we drew
+    // Вызываем обновление прямоугольной области, где был нарисован отрезок
     update(QRect(lastPoint, endPoint).normalized()
                .adjusted(-rad, -rad, +rad, +rad));
 
-    // Update the last position where we left off drawing
+    // Обновляем последнюю точку рисования
     lastPoint = endPoint;
 }
 
-// When the app is resized create a new image using
-// the changes made to the image
+// При изменении размера приложения создаем новое изображение
+// с изменениями, сделанными в изображении
 void ScribbleArea::resizeImage(QImage *image, const QSize &newSize)
 {
-    // Check if we need to redraw the image
+
+    // Проверяем, нужно ли перерисовывать изображение
     if (image->size() == newSize)
         return;
 
-    // Create a new image to display and fill it with white
+    // Создаем новое изображение и заполняем его белым цветом
     QImage newImage(newSize, QImage::Format_RGB32);
     newImage.fill(qRgb(255, 255, 255));
 
-    // Draw the image
+    // Рисуем изображение
     QPainter painter(&newImage);
     painter.drawImage(QPoint(0, 0), *image);
     *image = newImage;
@@ -215,19 +209,18 @@ bool ScribbleArea::saveSelection(const QString &filePath) {
 
     // Сохраняем выделенную область
     return croppedImage.save("../../ml/" + QFileInfo(filePath).fileName());
-
 }
 
-// Print the image
+// Печать изображения
 void ScribbleArea::print()
 {
-    // Check for print dialog availability
+    // Проверяем наличие диалога печати
 #if QT_CONFIG(printdialog)
 
-    // Can be used to print
+    // Создаем объект для печати
     QPrinter printer(QPrinter::HighResolution);
 
-    // Open printer dialog and print if asked
+    // Открываем диалог печати и печатаем, если пользователь согласен
     QPrintDialog printDialog(&printer, this);
     if (printDialog.exec() == QDialog::Accepted) {
         QPainter painter(&printer);

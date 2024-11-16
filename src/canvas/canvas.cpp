@@ -8,123 +8,143 @@
 Canvas::Canvas(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Canvas)
-
 {
-    setAttribute(Qt::WA_StaticContents);
-    ui->setupUi(this);
-    scribbleArea = new ScribbleArea(this);
-    QVBoxLayout *layout = new QVBoxLayout(ui->canvas_space);
-    layout->addWidget(scribbleArea);
+    setAttribute(Qt::WA_StaticContents); // Устанавливаем статическое содержимое
+    ui->setupUi(this); // Настраиваем интерфейс из файла .ui
+    scribbleArea = new ScribbleArea(this); // Создаем область для рисования
+    QVBoxLayout *layout = new QVBoxLayout(ui->canvas_space); // Устанавливаем вертикальный компоновщик в canvas_space
+    layout->addWidget(scribbleArea); // Добавляем область для рисования в компоновщик
+
+    // Задаем стиль для canvas_space
     ui->canvas_space->setStyleSheet("border: 2px solid black; border-radius: 10px; background-color: lightgray;");
+
+    /*
+    // Создаем кнопки "Draw" и "Select"
     QPushButton *drawButton = new QPushButton("Draw", this);
     QPushButton *selectButton = new QPushButton("Select", this);
 
+    // Привязываем действия к кнопкам
     connect(drawButton, &QPushButton::clicked, this, [this]() {
-        scribbleArea->setMode(ScribbleArea::Drawing);
+        scribbleArea->setMode(ScribbleArea::Drawing); // Устанавливаем режим рисования
     });
     connect(selectButton, &QPushButton::clicked, this, [this]() {
-        scribbleArea->setMode(ScribbleArea::Selecting);
+        scribbleArea->setMode(ScribbleArea::Selecting); // Устанавливаем режим выделения
     });
 
-    layout->addWidget(drawButton);
-    layout->addWidget(selectButton);
-
+    layout->addWidget(drawButton); // Добавляем кнопку "Draw" в компоновщик
+    layout->addWidget(selectButton); // Добавляем кнопку "Select" в компоновщик
+    */
 }
 
 Canvas::~Canvas()
 {
-    delete ui;
+    delete ui; // Удаляем интерфейсный объект
 }
 
-// User tried to close the app
+// Пользователь пытается закрыть приложение
 void Canvas::closeEvent(QCloseEvent *event)
 {
-    // If they try to close maybeSave() returns true
-    // if no changes have been made and the app closes
+    // Если maybeSave() возвращает true, то закрываем приложение
     if (maybeSave()) {
         event->accept();
     } else {
-        // If there have been changes ignore the event
+        // Если были несохраненные изменения, отменяем закрытие
         event->ignore();
     }
 }
 
+// Функция для открытия изображения
 void Canvas::openIm()
 {
-    if (maybeSave()) {
+    if (maybeSave()) { // Проверяем, нужно ли сохранить изменения
         QDir dir(QDir::current());
-        dir.cdUp(); // Поднимаемся на уровень выше
-        dir.cdUp(); // Поднимаемся на уровень выше
+        dir.cdUp(); // Переходим на уровень выше
+        dir.cdUp(); // Переходим на уровень выше
 
+        // Открываем диалог выбора файла
         QString fileName = QFileDialog::getOpenFileName(this,
                                                         tr("Open File"), dir.absolutePath());
-        // If we have a file name load the image and place
-        // it in the scribbleArea
+        // Если выбрали файл, загружаем его в scribbleArea
         if (!fileName.isEmpty()) {
-            QSize canvasSize = getCanvasSpaceSize();
-            scribbleArea->openImage(fileName,canvasSize); // Передаем размер canvas_space
+            QSize canvasSize = getCanvasSpaceSize(); // Получаем размер canvas_space
+            scribbleArea->openImage(fileName, canvasSize); // Передаем файл и размер
         }
     }
 }
 
+// Проверяем, нужно ли сохранить изменения
 bool Canvas::maybeSave()
 {
-    // Check for changes since last save
+    // Проверяем, были ли изменения
     if (scribbleArea->isModified()) {
         QMessageBox::StandardButton ret;
 
-        // Scribble is the title
-        // Add text and the buttons
-        ret = QMessageBox::warning(this, tr("Scribble"),
-                                   tr("The image has been modified.\n"
-                                      "Do you want to save your changes?"),
-                                   QMessageBox::Save | QMessageBox::Discard
-                                       | QMessageBox::Cancel);
+        // Показываем диалоговое окно с предложением сохранить изменения
+        ret = QMessageBox::warning(this, tr("Уверены?"),
+                                   tr("Изображение было изменено.\n"
+                                      "Хотите сохранить изменения?"),
+                                   QMessageBox::Yes | QMessageBox::Cancel
+                                       | QMessageBox::No);
 
-        // If save button clicked call for file to be saved
-        if (ret == QMessageBox::Save) {
+        // Если нажали "Сохранить", вызываем сохранение
+        if (ret == QMessageBox::Yes) {
             return saveFile("png");
-
-            // If cancel do nothing
         } else if (ret == QMessageBox::Cancel) {
+            // Если нажали "Отмена", не закрываем окно
             return false;
         }
     }
-    return true;
+    return true; // Если изменений не было, возвращаем true
 }
 
+// Функция для сохранения файла
 bool Canvas::saveFile(const QByteArray &fileFormat)
 {
-    // Define path, name and default file type
-    QString initialPath = QDir::currentPath() + "/untitled." + fileFormat;
+    QDir dir(QDir::current());
+    dir.cdUp(); // Переходим на уровень выше
+    dir.cdUp(); // Переходим на уровень выше
+    // Определяем начальный путь и формат файла
+    QString initialPath = dir.absolutePath() + "/untitled." + fileFormat;
 
-    // Get selected file from dialog
-    // Add the proper file formats and extensions
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),
+    // Открываем диалог сохранения файла
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save"),
                                                     initialPath,
                                                     tr("%1 Files (*.%2);;All Files (*)")
                                                         .arg(QString::fromLatin1(fileFormat.toUpper()))
                                                         .arg(QString::fromLatin1(fileFormat)));
 
-    // If no file do nothing
+    // Если файл не выбран, возвращаем false
     if (fileName.isEmpty()) {
         return false;
     } else {
-
-        // Call for the file to be saved
+        // Вызываем сохранение файла
         return scribbleArea->saveImage(fileName, fileFormat.constData());
     }
 }
 
-
+// Получаем размер canvas_space
 QSize Canvas::getCanvasSpaceSize() const
 {
     return ui->canvas_space->size();
 }
 
-
+// Триггер для открытия изображения через кнопку
 void Canvas::on_open_button_canvas_triggered()
 {
-    this->openIm();
+    this->openIm(); // Вызываем openIm() для открытия файла
 }
 
+bool Canvas::on_save_button_canvas_triggered()
+{
+    return saveFile("png");
+}
+
+void Canvas::on_actionPen_triggered()
+{
+    scribbleArea->setMode(ScribbleArea::Drawing);
+}
+
+void Canvas::on_actionSelecting_triggered()
+{
+    scribbleArea->setMode(ScribbleArea::Selecting);
+}    
