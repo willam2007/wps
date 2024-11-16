@@ -2,6 +2,8 @@
 #define CANVAS_H
 
 #include "../area/scribblearea.h"
+#include "ui_canvas.h"
+
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -18,26 +20,28 @@ class Canvas : public QMainWindow
 
 public:
     explicit Canvas(QWidget *parent = nullptr);
-    ~Canvas();
+    ~Canvas() {delete ui;}; // Удаляем интерфейс, чтобы освободить память
 
     void openIm();
-    QSize getCanvasSpaceSize() const;
+    QSize getCanvasSpaceSize() const {return ui->canvas_space->size();}; // Получаем размер canvas_space
     void closeEvent(QCloseEvent *event) override;
 
 private slots:
-    void on_open_button_canvas_triggered();
-    bool on_save_button_canvas_triggered();
-    void on_actionPen_triggered();
-    void on_actionSelecting_triggered();    
+    void on_open_button_canvas_triggered() {this->openIm();}; // Обработчик нажатия кнопки выбора проекта
+    bool on_save_button_canvas_triggered() {return saveFile("png");}; // Обработчик нажатия кнопки сохранения проекта
+    void on_actionPen_triggered() {scribbleArea->setMode(ScribbleArea::Drawing);}; // Обработчик нажатия выбора режима рисования
+    void on_actionSelecting_triggered() {scribbleArea->setMode(ScribbleArea::Selecting);}; // Обработчик нажатия выбора режима выбора
+    void on_actionAbout_triggered() {this->about();}; // Обработчик нажатия кнопки о нашем WPS
 
 private:
     Ui::Canvas *ui;
     ScribbleArea *scribbleArea;
 
     bool maybeSave();
-
+    void penWidth();
+    void penColor();
+    void about();
     bool saveFile(const QByteArray &fileFormat);
-
 
 };
 
