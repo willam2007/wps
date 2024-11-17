@@ -21,7 +21,6 @@ class Canvas : public QMainWindow
 public:
     explicit Canvas(QWidget *parent = nullptr);
     ~Canvas() {delete ui;}; // Удаляем интерфейс, чтобы освободить память
-
     void openIm();
     QSize getCanvasSpaceSize() const {return ui->canvas_space->size();}; // Получаем размер canvas_space
     void closeEvent(QCloseEvent *event) override;
@@ -29,9 +28,12 @@ public:
 private slots:
     void on_open_button_canvas_triggered() {this->openIm();}; // Обработчик нажатия кнопки выбора проекта
     bool on_save_button_canvas_triggered() {return saveFile("png");}; // Обработчик нажатия кнопки сохранения проекта
-    void on_actionPen_triggered() {scribbleArea->setMode(ScribbleArea::Drawing);}; // Обработчик нажатия выбора режима рисования
+    void on_actionPen_triggered(); // Обработчик нажатия выбора режима рисования
     void on_actionSelecting_triggered() {scribbleArea->setMode(ScribbleArea::Selecting);}; // Обработчик нажатия выбора режима выбора
     void on_actionAbout_triggered() {this->about();}; // Обработчик нажатия кнопки о нашем WPS
+    void on_actionClear_triggered() {scribbleArea->clearImage();}; // Обработчик нажатия очистки холста
+    void on_actionNone_triggered(); // Обработчик нажатия выбора режима
+    void on_horizontalSlider_valueChanged(int value) {scribbleArea->setPenWidth(value);};
 
 private:
     Ui::Canvas *ui;

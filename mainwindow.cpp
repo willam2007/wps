@@ -19,7 +19,7 @@ void MainWindow::on_create_button_project_clicked()
 {
     canvas = new Canvas();
     canvas->setWindowState(Qt::WindowMaximized);
-    canvas->setFixedSize(1920, 1080);
+    //canvas->setFixedSize(1920, 1080);
     canvas->show();
     this->hide();
 }
