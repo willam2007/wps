@@ -69,8 +69,8 @@ private:
     QImage image;           // Изображение для рисования
     QPoint lastPoint;       // Последняя точка рисования
     QRect selectionRect;    // Прямоугольник выделенной области
-
     Mode currentMode;       // Текущий режим работы ScribbleArea
+
 };
 
 #endif // SCRIBBLEAREA_H

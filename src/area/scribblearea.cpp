@@ -115,10 +115,83 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event) {
             scribbling = false;
         } else if (currentMode == Selecting && selecting) {
             selectionRect.setBottomRight(event->pos());
+            update();
+
+            // Цикл для повторного показа окна, если текст пустой
+            while (true) {
+                QInputDialog inputDialog;
+                inputDialog.setWindowTitle(tr("Введите текст"));
+                inputDialog.setLabelText(tr("Введите текст для сохранения:"));
+                inputDialog.setInputMode(QInputDialog::TextInput);
+                inputDialog.setTextValue(""); // Пустое значение по умолчанию
+
+                // Устанавливаем стиль
+                inputDialog.setStyleSheet(R"(
+                    QDialog {
+                        background-color: #f0f0f0;
+                        border: 2px solid #5a5a5a;
+                        border-radius: 10px;
+                    }
+                    QLabel {
+                        font-size: 14px;
+                        color: #333333;
+                    }
+                    QLineEdit {
+                        background-color: #ffffff;
+                        border: 1px solid #cccccc;
+                        border-radius: 5px;
+                        padding: 5px;
+                        font-size: 14px;
+                    }
+                    QPushButton {
+                        background-color: #4CAF50;
+                        border: none;
+                        color: white;
+                        padding: 10px 20px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 14px;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                        border-radius: 5px;
+                    }
+                    QPushButton:hover {
+                        background-color: #45a049;
+                    }
+                    QPushButton:pressed {
+                        background-color: #3e8e41;
+                    }
+                )");
+
+                // Обрабатываем результат
+                if (inputDialog.exec() == QDialog::Accepted) {
+                    QString userText = inputDialog.textValue();
+                    if (!userText.isEmpty()) {
+                        // Сохраняем текст в файл
+                        QFile file("../../ml/user_text.txt");
+                        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+                            QTextStream out(&file);
+                            out << userText << "\n"; // Перезаписываем файл новым текстом
+                            file.close();
+                        }
+
+                        // Сохраняем выделенную область
+                        saveSelection();
+
+                        // Завершаем цикл, если текст введён
+                        break;
+                    } else {
+                        QMessageBox::warning(nullptr, tr("Ошибка"), tr("Текст не может быть пустым!"));
+                    }
+                } else {
+                    // Пользователь отменил ввод
+                    break;
+                }
+            }
+
             selecting = false;
             update();
-            // Сохраняем выделенную область
-            saveSelection();
         }
     }
 }
@@ -188,7 +261,7 @@ void ScribbleArea::resizeImage(QImage *image, const QSize &newSize)
 
     // Создаем новое изображение и заполняем его белым цветом
     QImage newImage(newSize, QImage::Format_RGB32);
-    newImage.fill(qRgb(255, 255, 255));
+    newImage.fill(qRgb(3, 25, 5));
 
     // Рисуем изображение
     QPainter painter(&newImage);

@@ -12,12 +12,21 @@ Canvas::Canvas(QWidget *parent)
 {
     //setAttribute(Qt::WA_StaticContents); // Устанавливаем статическое содержимое
     ui->setupUi(this); // Настраиваем интерфейс из файла .ui
+    ui->canvas_pages->setCurrentWidget(ui->inactive_page);
     scribbleArea = new ScribbleArea(this); // Создаем область для рисования
     QVBoxLayout *layout = new QVBoxLayout(ui->canvas_space); // Устанавливаем вертикальный компоновщик в canvas_space
     layout->addWidget(scribbleArea); // Добавляем область для рисования в компоновщик
 
     // Задаем стиль для canvas_space
-    ui->canvas_space->setStyleSheet("border: 2px solid black; border-radius: 10px; background-color: lightgray;");
+    // Устанавливаем стиль ТОЛЬКО для canvas_space
+    ui->canvas_space->setStyleSheet(
+        "#canvas_space {"
+        "    border: 2px solid black;"
+        "    border-radius: 10px;"
+        "    background-color: lightgray;"
+        "}"
+        );
+    ui->canvas_pages->setStyleSheet("border: 2px solid black; border-radius: 10px; background-color: lightgray;");
 }
 
 // Пользователь пытается закрыть приложение
@@ -135,3 +144,18 @@ bool Canvas::saveFile(const QByteArray &fileFormat)
         return scribbleArea->saveImage(fileName, fileFormat.constData());
     }
 }
+
+void Canvas::on_actionPen_triggered()
+{
+    // Устанавливаем режим рисования для ScribbleArea
+    scribbleArea->setMode(ScribbleArea::Drawing);
+
+    // Переключаемся на страницу pen_page в canvas_pages
+    ui->canvas_pages->setCurrentWidget(ui->pen_page);
+}
+
+void Canvas::on_actionNone_triggered()
+{
+    scribbleArea->setMode(ScribbleArea::Inactive); // Обработчик нажатия выбора режима
+    ui->canvas_pages->setCurrentWidget(ui->inactive_page);
+};

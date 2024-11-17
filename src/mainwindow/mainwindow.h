@@ -12,9 +12,7 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-// ScribbleArea используется для рисования изображения
-class ScribbleArea;
-class Canvas;
+class Canvas; // Canvas используется для окна с полотном
 
 class MainWindow : public QMainWindow
 {
@@ -30,8 +28,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    // Поле для рисования
-    ScribbleArea *scribbleArea;
     Canvas *canvas;
 
 };
