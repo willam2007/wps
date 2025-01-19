@@ -71,7 +71,7 @@ void ScribbleArea::setPenWidth(int newWidth)
 // Заливка изображения белым цветом
 void ScribbleArea::clearImage()
 {
-    image.fill(qRgb(255, 55, 255));
+    image.fill(qRgb(255, 255, 255));
     modified = true;
     update();
 }
@@ -261,7 +261,7 @@ void ScribbleArea::resizeImage(QImage *image, const QSize &newSize)
 
     // Создаем новое изображение и заполняем его белым цветом
     QImage newImage(newSize, QImage::Format_RGB32);
-    newImage.fill(qRgb(3, 25, 5));
+    newImage.fill(qRgb(255, 255, 255));
 
     // Рисуем изображение
     QPainter painter(&newImage);
