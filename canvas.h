@@ -5,6 +5,7 @@
 #include "ui_canvas.h"
 
 #include <QMainWindow>
+#include <qpropertyanimation.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -38,8 +39,10 @@ private slots:
 private:
     Ui::Canvas *ui;
     ScribbleArea *scribbleArea;
+    QPropertyAnimation *fadeAnimation;
 
     bool maybeSave();
+    void setupPageTransition(QWidget *nextPage);
     void penWidth();
     void penColor();
     void about();
