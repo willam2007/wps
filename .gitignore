@@ -1,0 +1,5 @@
+/build
+/.cache
+/.vscode
+CMakeLists.txt.user
+/.qtcreator

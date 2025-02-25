@@ -113,32 +113,96 @@
       </property>
       <widget class="QWidget" name="inactive_page"/>
       <widget class="QWidget" name="pen_page">
-       <widget class="QSlider" name="horizontalSlider">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>80</y>
-          <width>171</width>
-          <height>22</height>
-         </rect>
+       <property name="objectName">
+        <string>pen_page</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>10</number>
         </property>
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
+        <property name="topMargin">
+         <number>10</number>
         </property>
-       </widget>
-       <widget class="QLabel" name="label">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>30</y>
-          <width>131</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>тут все для кисточки</string>
-        </property>
-       </widget>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="text">
+           <string>Pen Width</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="horizontalSlider">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="colorLabel">
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="text">
+           <string>Pen Color</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="colorButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #2980b9, stop:0.5 #3498db, stop:1 #2980b9);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px;
+}
+
+QPushButton:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #3498db, stop:0.5 #2980b9, stop:1 #3498db);
+}
+
+QPushButton:pressed {
+    background: #2472a4;
+}</string>
+          </property>
+          <property name="text">
+           <string>Choose Color</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
