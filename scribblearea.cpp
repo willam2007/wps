@@ -291,14 +291,13 @@ bool ScribbleArea::saveSelection(const QString &filePath) {
     // Формируем JSON для запроса
     QJsonObject requestData;
     requestData["prompt"] = prompt;
-    requestData["width"] = selectionRect.width();
-    requestData["height"] = selectionRect.height();
+    requestData["size"] = QString("%1x%2").arg(selectionRect.width()).arg(selectionRect.height());
 
     QJsonDocument doc(requestData);
     QByteArray jsonData = doc.toJson();
 
     // Создаем POST запрос
-    QNetworkRequest request(QUrl("http://localhost:8000/generate")); // Замените на ваш URL
+    QNetworkRequest request(QUrl("http://192.168.0.7:5000/generate")); // Замените на ваш URL
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     qDebug() << "Отправляем POST запрос на сервер";
