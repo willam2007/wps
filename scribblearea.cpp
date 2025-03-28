@@ -1,6 +1,7 @@
 #include "scribblearea.h"
 
 #include <QtWidgets>
+#include <QDebug>
 #include <QDir>
 #if defined(QT_PRINTSUPPORT_LIB)
 #include <QtPrintSupport/qtprintsupportglobal.h>
@@ -20,6 +21,9 @@ ScribbleArea::ScribbleArea(QWidget *parent)
     myPenWidth = 1;
     myPenColor = Qt::blue;
     currentMode = Inactive;
+    
+    // Инициализируем сетевой менеджер
+    networkManager = new QNetworkAccessManager(this);
 }
 
 void ScribbleArea::setMode(Mode newMode) {
@@ -270,17 +274,68 @@ void ScribbleArea::resizeImage(QImage *image, const QSize &newSize)
 }
 
 bool ScribbleArea::saveSelection(const QString &filePath) {
-    // Извлекаем область из изображения
-    QImage croppedImage = image.copy(selectionRect);
-
-    // Проверяем, существует ли папка "ml", если нет - создаем её
-    QDir dir;
-    if (!dir.exists("../../ml")) {
-        dir.mkpath("../../ml");
+    qDebug() << "Начало функции saveSelection";
+    
+    // Читаем текст промпта из файла
+    QString prompt;
+    QFile promptFile("../../ml/user_text.txt");
+    if (promptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&promptFile);
+        prompt = in.readLine();
+        promptFile.close();
+        qDebug() << "Прочитан текст промпта:" << prompt;
+    } else {
+        qDebug() << "Ошибка при открытии файла с текстом";
     }
 
-    // Сохраняем выделенную область
-    return croppedImage.save("../../ml/" + QFileInfo(filePath).fileName());
+    // Формируем JSON для запроса
+    QJsonObject requestData;
+    requestData["prompt"] = prompt;
+    requestData["width"] = selectionRect.width();
+    requestData["height"] = selectionRect.height();
+
+    QJsonDocument doc(requestData);
+    QByteArray jsonData = doc.toJson();
+
+    // Создаем POST запрос
+    QNetworkRequest request(QUrl("http://localhost:8000/generate")); // Замените на ваш URL
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    qDebug() << "Отправляем POST запрос на сервер";
+    qDebug() << "JSON данные:" << QString(jsonData);
+    
+    // Отправляем запрос
+    QNetworkReply *reply = networkManager->post(request, jsonData);
+
+    // Подключаем обработчик завершения запроса
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            qDebug() << "Успешно получен ответ от сервера";
+            // Получаем ответ
+            QByteArray responseData = reply->readAll();
+            qDebug() << "Ответ сервера:" << QString(responseData);
+            
+            QJsonDocument response = QJsonDocument::fromJson(responseData);
+            QJsonObject jsonResponse = response.object();
+
+            // Декодируем base64 в изображение
+            QByteArray imageData = QByteArray::fromBase64(jsonResponse["image"].toString().toLatin1());
+            QImage generatedImage;
+            generatedImage.loadFromData(imageData);
+
+            // Отображаем изображение в выделенной области
+            QPainter painter(&image);
+            painter.drawImage(selectionRect, generatedImage);
+            update();
+        } else {
+            QString errorString = reply->errorString();
+            qDebug() << "Ошибка при получении ответа:" << errorString;
+            QMessageBox::warning(this, tr("Ошибка"), tr("Не удалось получить изображение с сервера: %1").arg(errorString));
+        }
+        reply->deleteLater();
+    });
+
+    return true;
 }
 
 // Печать изображения

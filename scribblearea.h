@@ -5,6 +5,11 @@
 #include <QImage>
 #include <QPoint>
 #include <QWidget>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QBuffer>
 
 // Класс ScribbleArea - область для рисования и выделения
 class ScribbleArea : public QWidget
@@ -70,6 +75,7 @@ private:
     QPoint lastPoint;       // Последняя точка рисования
     QRect selectionRect;    // Прямоугольник выделенной области
     Mode currentMode;       // Текущий режим работы ScribbleArea
+    QNetworkAccessManager *networkManager; // Менеджер сетевых запросов
 
 };
 

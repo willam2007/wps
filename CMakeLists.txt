@@ -9,8 +9,10 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets )
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Network)
 find_package(Qt6PrintSupport REQUIRED)
 
 
@@ -52,6 +54,7 @@ else()
 endif()
 
 target_link_libraries(qqeeeee PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(qqeeeee PRIVATE Qt${QT_VERSION_MAJOR}::Network)
 target_link_libraries(qqeeeee PRIVATE Qt6::PrintSupport)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

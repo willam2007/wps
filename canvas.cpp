@@ -5,6 +5,7 @@
 #include <qboxlayout.h>
 #include <qpainter.h>
 #include <QtWidgets>
+#include <QDebug>
 
 Canvas::Canvas(QWidget *parent)
     : QMainWindow(parent)
