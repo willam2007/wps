@@ -173,7 +173,7 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event) {
                     QString userText = inputDialog.textValue();
                     if (!userText.isEmpty()) {
                         // Сохраняем текст в файл
-                        QFile file("../../ml/user_text.txt");
+                        QFile file("../ml/user_text.txt");
                         if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
                             QTextStream out(&file);
                             out << userText << "\n"; // Перезаписываем файл новым текстом
