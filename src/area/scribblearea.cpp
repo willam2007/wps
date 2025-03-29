@@ -214,6 +214,18 @@ void ScribbleArea::setZoomFactor(double factor) {
     update();
 }
 
+void ScribbleArea::resetViewport() {
+    // Вычисляем размеры изображения с учетом масштаба
+    QSizeF imageSize = image.size() * m_zoomFactor;
+    QSizeF viewportSize = size();
+    
+    // Центрируем изображение
+    viewportOffset.setX((imageSize.width() - viewportSize.width()) / 2);
+    viewportOffset.setY((imageSize.height() - viewportSize.height()) / 2);
+    
+    update();
+}
+
 void ScribbleArea::wheelEvent(QWheelEvent *event) {
     // Сохраняем позицию курсора до масштабирования
     QPointF oldPos = event->position();

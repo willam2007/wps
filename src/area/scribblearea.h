@@ -42,6 +42,9 @@ public:
     // Установить режим работы (рисование, выделение и т.д.)
     void setMode(Mode newMode);
 
+    void setZoomFactor(double factor);
+    void resetViewport();
+
 public slots:
     // Очистить изображение
     void clearImage();
@@ -67,8 +70,6 @@ private:
     void drawLineTo(const QPoint &endPoint);
     // Изменить размер изображения
     void resizeImage(QImage *image, const QSize &newSize);
-    
-    void setZoomFactor(double factor);
 
     double m_zoomFactor = 1.0;
     QPointF viewportOffset;  // Смещение области просмотра

@@ -113,9 +113,6 @@
       </property>
       <widget class="QWidget" name="inactive_page"/>
       <widget class="QWidget" name="pen_page">
-       <property name="objectName">
-        <string>pen_page</string>
-       </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="spacing">
          <number>10</number>
@@ -125,37 +122,37 @@
         </property>
         <item>
          <widget class="QLabel" name="label">
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
           <property name="text">
            <string>Pen Width</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QSlider" name="horizontalSlider">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="value">
-           <number>1</number>
-          </property>
           <property name="minimum">
            <number>1</number>
           </property>
           <property name="maximum">
            <number>50</number>
           </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="colorLabel">
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
           <property name="text">
            <string>Pen Color</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
          </widget>
         </item>
@@ -214,7 +211,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1127</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuOpen">
@@ -230,10 +227,11 @@ QPushButton:pressed {
      <string>Tools</string>
     </property>
     <addaction name="actionPen"/>
-    <addaction name="actionEraiser"/>
     <addaction name="actionSelecting"/>
     <addaction name="actionClear"/>
+    <addaction name="actionReset"/>
     <addaction name="actionNone"/>
+    <addaction name="actionEraiser"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
@@ -282,6 +280,11 @@ QPushButton:pressed {
   <action name="actionNone">
    <property name="text">
     <string>None</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="text">
+    <string>Reset</string>
    </property>
   </action>
  </widget>
