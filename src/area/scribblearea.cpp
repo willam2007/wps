@@ -350,7 +350,7 @@ bool ScribbleArea::saveSelection(const QString &filePath) {
     
     // Читаем текст промпта из файла
     QString prompt;
-    QFile promptFile("../../ml/user_text.txt");
+    QFile promptFile("../ml/user_text.txt");
     if (promptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&promptFile);
         prompt = in.readLine();
