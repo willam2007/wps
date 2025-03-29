@@ -60,11 +60,18 @@ protected:
     // Обработка изменения размера виджета
     void resizeEvent(QResizeEvent *event) override;
 
+    void wheelEvent(QWheelEvent *event) override;
+
 private:
     // Нарисовать линию до указанной точки
     void drawLineTo(const QPoint &endPoint);
     // Изменить размер изображения
     void resizeImage(QImage *image, const QSize &newSize);
+    
+    void setZoomFactor(double factor);
+
+    double m_zoomFactor = 1.0;
+    QPointF viewportOffset;  // Смещение области просмотра
 
     bool modified;          // Флаг изменений
     bool scribbling;        // Флаг режима рисования
