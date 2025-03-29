@@ -103,7 +103,9 @@ void ScribbleArea::mousePressEvent(QMouseEvent *event) {
 void ScribbleArea::mouseMoveEvent(QMouseEvent *event) {
     if ((event->buttons() & Qt::LeftButton)) {
         if (currentMode == Drawing && scribbling) {
-            drawLineTo(event->pos());
+            // Передаем текущую позицию мыши с учетом смещения viewport
+            QPoint adjustedPos = event->pos();
+            drawLineTo(adjustedPos);
         } else if (currentMode == Selecting && selecting) {
             selectionRect.setBottomRight(event->pos());
             update();
@@ -207,19 +209,64 @@ bool ScribbleArea::isModified() const
 
 // QPainter предоставляет функции для рисования на виджете
 // Событие QPaintEvent отправляется виджетам, которым нужно обновиться
-void ScribbleArea::paintEvent(QPaintEvent *event) {
-    QPainter painter(this);
-    QRect dirtyRect = event->rect();
-    painter.drawImage(dirtyRect, image, dirtyRect);
+void ScribbleArea::setZoomFactor(double factor) {
+    m_zoomFactor = factor;
+    update();
+}
 
-    if (currentMode == Selecting && selecting) {
-        painter.setPen(QPen(Qt::red, 1, Qt::DashLine));
-        painter.drawRect(selectionRect.normalized());
+void ScribbleArea::resetViewport() {
+    // Вычисляем размеры изображения с учетом масштаба
+    QSizeF imageSize = image.size() * m_zoomFactor;
+    QSizeF viewportSize = size();
+    
+    // Центрируем изображение
+    viewportOffset.setX((imageSize.width() - viewportSize.width()) / 2);
+    viewportOffset.setY((imageSize.height() - viewportSize.height()) / 2);
+    
+    update();
+}
+
+void ScribbleArea::wheelEvent(QWheelEvent *event) {
+    // Сохраняем позицию курсора до масштабирования
+    QPointF oldPos = event->position();
+    QPointF scenePos = (oldPos + viewportOffset) / m_zoomFactor;
+    
+    // Изменяем масштаб
+    double oldZoom = m_zoomFactor;
+    if (event->angleDelta().y() > 0) {
+        setZoomFactor(qMin(m_zoomFactor * 1.1, 1.1)); // Ограничиваем максимальный масштаб
+    } else {
+        setZoomFactor(qMax(m_zoomFactor / 1.1, 0.7)); // Ограничиваем минимальный масштаб
+    }
+    
+    // Вычисляем новое смещение, чтобы сохранить позицию под курсором
+    QPointF newPos = scenePos * m_zoomFactor - oldPos;
+    viewportOffset = newPos;
+    
+    // Ограничиваем смещение, чтобы изображение не уходило за пределы видимой области
+    QSizeF imageSize = image.size() * m_zoomFactor;
+    QSizeF viewportSize = size();
+    
+    // Ограничиваем смещение по X
+    if (imageSize.width() <= viewportSize.width()) {
+        // Если изображение меньше viewport, центрируем его
+        viewportOffset.setX((imageSize.width() - viewportSize.width()) / 2);
+    } else {
+        // Иначе ограничиваем смещение
+        viewportOffset.setX(qBound(viewportSize.width() - imageSize.width(), viewportOffset.x(), 0.0));
+    }
+    
+    // Ограничиваем смещение по Y
+    if (imageSize.height() <= viewportSize.height()) {
+        // Если изображение меньше viewport, центрируем его
+        viewportOffset.setY((imageSize.height() - viewportSize.height()) / 2);
+    } else {
+        // Иначе ограничиваем смещение
+        viewportOffset.setY(qBound(viewportSize.height() - imageSize.height(), viewportOffset.y(), 0.0));
     }
 }
 
-void ScribbleArea::resizeEvent(QResizeEvent *event)
-{
+void ScribbleArea::resizeEvent(QResizeEvent *event) {
     if (width() > image.width() || height() > image.height()) {
         int newWidth = qMax(width() + 128, image.width());
         int newHeight = qMax(height() + 128, image.height());
@@ -238,20 +285,57 @@ void ScribbleArea::drawLineTo(const QPoint &endPoint)
     painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
                         Qt::RoundJoin));
 
+    // Применяем масштабирование и учитываем смещение viewport
+    QPoint scaledLastPoint = ((lastPoint + viewportOffset) / m_zoomFactor).toPoint();
+    QPoint scaledEndPoint = ((endPoint + viewportOffset) / m_zoomFactor).toPoint();
+
     // Рисуем линию от последней зафиксированной точки до текущей
-    painter.drawLine(lastPoint, endPoint);
+    painter.drawLine(scaledLastPoint, scaledEndPoint);
 
     // Отмечаем, что изображение не сохранено
     modified = true;
 
-    int rad = (myPenWidth / 2) + 2;
+    // Вычисляем радиус обновления с учетом масштаба
+    int rad = (myPenWidth / m_zoomFactor / 2) + 2;
 
-    // Вызываем обновление прямоугольной области, где был нарисован отрезок
-    update(QRect(lastPoint, endPoint).normalized()
-               .adjusted(-rad, -rad, +rad, +rad));
+    // Создаем прямоугольник обновления в координатах исходного изображения
+    QRect updateRect = QRect(scaledLastPoint, scaledEndPoint).normalized()
+                           .adjusted(-rad, -rad, +rad, +rad);
+
+    // Преобразуем прямоугольник обновления в экранные координаты
+    QRect screenUpdateRect = QRect(
+        (updateRect.topLeft() * m_zoomFactor - viewportOffset).toPoint(),
+        (updateRect.bottomRight() * m_zoomFactor - viewportOffset).toPoint()
+    ).normalized();
+
+    // Обновляем область экрана
+    update(screenUpdateRect);
 
     // Обновляем последнюю точку рисования
     lastPoint = endPoint;
+}
+
+void ScribbleArea::paintEvent(QPaintEvent *event) {
+    QPainter painter(this);
+    
+    // Сохраняем текущее состояние painter
+    painter.save();
+    
+    // Применяем смещение и масштабирование
+    painter.translate(-viewportOffset);
+    painter.scale(m_zoomFactor, m_zoomFactor);
+    
+    // Рисуем все изображение
+    painter.drawImage(0, 0, image);
+    
+    // Восстанавливаем состояние painter
+    painter.restore();
+    
+    // Если есть выделение, рисуем его с учетом масштаба
+    if (currentMode == Selecting && selecting) {
+        painter.setPen(QPen(Qt::red, 1, Qt::DashLine));
+        painter.drawRect(selectionRect.normalized());
+    }
 }
 
 // При изменении размера приложения создаем новое изображение
@@ -278,7 +362,7 @@ bool ScribbleArea::saveSelection(const QString &filePath) {
     
     // Читаем текст промпта из файла
     QString prompt;
-    QFile promptFile("../../ml/user_text.txt");
+    QFile promptFile("../ml/user_text.txt");
     if (promptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&promptFile);
         prompt = in.readLine();

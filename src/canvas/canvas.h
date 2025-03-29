@@ -35,6 +35,7 @@ private slots:
     void on_actionClear_triggered() {scribbleArea->clearImage();}; // Обработчик нажатия очистки холста
     void on_actionNone_triggered(); // Обработчик нажатия выбора режима
     void on_horizontalSlider_valueChanged(int value) {scribbleArea->setPenWidth(value);};
+    void on_actionReset_triggered();
 
 private:
     Ui::Canvas *ui;
