@@ -42,6 +42,9 @@ public:
     // Установить режим работы (рисование, выделение и т.д.)
     void setMode(Mode newMode);
 
+    void setZoomFactor(double factor);
+    void resetViewport();
+
 public slots:
     // Очистить изображение
     void clearImage();
@@ -60,11 +63,17 @@ protected:
     // Обработка изменения размера виджета
     void resizeEvent(QResizeEvent *event) override;
 
+    void wheelEvent(QWheelEvent *event) override;
+
 private:
     // Нарисовать линию до указанной точки
     void drawLineTo(const QPoint &endPoint);
     // Изменить размер изображения
     void resizeImage(QImage *image, const QSize &newSize);
+
+
+    double m_zoomFactor = 1.0;
+    QPointF viewportOffset;  // Смещение области просмотра
 
     bool modified;          // Флаг изменений
     bool scribbling;        // Флаг режима рисования
@@ -76,7 +85,6 @@ private:
     QRect selectionRect;    // Прямоугольник выделенной области
     Mode currentMode;       // Текущий режим работы ScribbleArea
     QNetworkAccessManager *networkManager; // Менеджер сетевых запросов
-
 };
 
 #endif // SCRIBBLEAREA_H

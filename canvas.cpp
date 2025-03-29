@@ -261,3 +261,11 @@ void Canvas::on_actionNone_triggered()
     scribbleArea->setMode(ScribbleArea::Inactive); // Обработчик нажатия выбора режима
     setupPageTransition(ui->inactive_page);
 };
+
+void Canvas::on_actionReset_triggered()
+{
+    // Сбрасываем масштаб к исходному значению (1.0) и центрируем изображение
+    scribbleArea->setZoomFactor(1.0);
+    scribbleArea->resetViewport();
+    update();
+}
