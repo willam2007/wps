@@ -13,6 +13,7 @@ class MainWindow;
 QT_END_NAMESPACE
 
 class Canvas; // Canvas используется для окна с полотном
+class Choose; // Choose используется для окна с выбором шаблона
 
 class MainWindow : public QMainWindow
 {
@@ -29,7 +30,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Canvas *canvas;
-
+    Choose *choose;
 };
 
 #endif

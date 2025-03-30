@@ -1,6 +1,7 @@
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
 #include "canvas.h"
+#include "choose.h"
 
 #include <QtWidgets>
 #include <QDebug>
@@ -17,11 +18,16 @@ MainWindow::MainWindow(QWidget *parent)
 // Обработчик нажатия кнопки "Создать проект"
 void MainWindow::on_create_button_project_clicked()
 {
+    choose = new Choose();
+    choose->show();
+    this->hide();
+    /*
     canvas = new Canvas();
     canvas->setWindowState(Qt::WindowMaximized);
     //canvas->setFixedSize(1920, 1080);
     canvas->show();
     this->hide();
+    */
 }
 
 // Обработчик нажатия кнопки "Выбрать проект"
