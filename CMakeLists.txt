@@ -27,13 +27,15 @@ set(PROJECT_SOURCES
         canvas.h
         canvas.cpp
         canvas.ui
+        choose.h
+        choose.cpp
+        choose.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 5)
     qt_add_executable(qqeeeee
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        choose.h choose.cpp choose.ui
     )
 
 # Define target properties for Android with Qt 6 as:
