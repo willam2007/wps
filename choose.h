@@ -13,6 +13,8 @@ class Choose;
 }
 QT_END_NAMESPACE
 
+class Canvas; // Canvas используется для окна с полотном
+
 class Choose : public QMainWindow
 {
     Q_OBJECT
@@ -36,6 +38,7 @@ private slots:
 
 private:
     Ui::Choose *ui;
+    Canvas *canvas;
     QPropertyAnimation *fadeAnimation;
 };
 

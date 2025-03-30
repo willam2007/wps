@@ -21,21 +21,13 @@ void MainWindow::on_create_button_project_clicked()
     choose = new Choose();
     choose->show();
     this->hide();
-    /*
-    canvas = new Canvas();
-    canvas->setWindowState(Qt::WindowMaximized);
-    //canvas->setFixedSize(1920, 1080);
-    canvas->show();
-    this->hide();
-    */
 }
 
 // Обработчик нажатия кнопки "Выбрать проект"
 void MainWindow::on_choose_button_project_clicked()
 {
-    canvas = new Canvas();
+    canvas = new Canvas(1920, 1080);
     canvas->setWindowState(Qt::WindowMaximized);
-    //canvas->setFixedSize(1920, 1080);
     canvas->show();
     canvas->hide();
     canvas->openIm();

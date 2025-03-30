@@ -1,4 +1,5 @@
 #include "choose.h"
+#include "canvas.h"
 #include "ui_choose.h"
 
 #include <qboxlayout.h>
@@ -49,7 +50,13 @@ void Choose::on_pushButton_random_clicked()
 
 void Choose::on_pushButton_create_clicked()
 {
-
+    int width = ui->spinBox_width->value();
+    int height = ui->spinBox_height->value();
+    canvas = new Canvas(width, height);
+    canvas->setWindowState(Qt::WindowMaximized);
+    //canvas->setFixedSize(1920, 1080);
+    canvas->show();
+    this->hide();
 }
 
 

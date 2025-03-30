@@ -7,7 +7,7 @@
 #include <QtWidgets>
 #include <QDebug>
 
-Canvas::Canvas(QWidget *parent)
+Canvas::Canvas(int width, int height, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Canvas)
     , fadeAnimation(nullptr)
@@ -39,12 +39,9 @@ Canvas::Canvas(QWidget *parent)
         "    border: 2px solid black;"
         "    border-radius: 10px;"
         "    background-color: lightgray;"
-        "    min-width: 300px;"
-        "    min-height: 200px;"
-        "    max-width: 2000px;"
-        "    max-height: 1200px;"
         "}"
         );
+    ui->canvas_space->setFixedSize(width, height);
     ui->canvas_pages->setStyleSheet(
         "QStackedWidget#canvas_pages {"
         "    border: 2px solid #2c3e50;"

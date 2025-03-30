@@ -20,7 +20,7 @@ class Canvas : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Canvas(QWidget *parent = nullptr);
+    explicit Canvas(int width = 1920, int height = 1080, QWidget *parent = nullptr);
     ~Canvas() {delete ui;}; // Удаляем интерфейс, чтобы освободить память
     void openIm();
     QSize getCanvasSpaceSize() const {return ui->canvas_space->size();}; // Получаем размер canvas_space
