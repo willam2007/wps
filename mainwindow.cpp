@@ -29,7 +29,7 @@ void MainWindow::on_choose_button_project_clicked()
 {
     canvas = new Canvas();
     canvas->setWindowState(Qt::WindowMaximized);
-    canvas->setFixedSize(1920, 1080);
+    //canvas->setFixedSize(1920, 1080);
     canvas->show();
     canvas->hide();
     canvas->openIm();
