@@ -24,15 +24,18 @@ set(PROJECT_SOURCES
         src/mainwindow/mainwindow.cpp
         src/area/scribblearea.cpp
         src/canvas/canvas.cpp
+        src/choose/choose.cpp
 
     #headers files
         src/mainwindow/mainwindow.h
         src/area/scribblearea.h
         src/canvas/canvas.h
+        src/choose/choose.h
     
     #ui files
         src/mainwindow/mainwindow.ui
         src/canvas/canvas.ui
+        src/choose/choose.ui
 
     ${TS_FILES}
 )

@@ -7,7 +7,7 @@
 #include <QtWidgets>
 #include <QDebug>
 
-Canvas::Canvas(QWidget *parent)
+Canvas::Canvas(int width, int height, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Canvas)
     , fadeAnimation(nullptr)
@@ -31,7 +31,7 @@ Canvas::Canvas(QWidget *parent)
 
     // Connect color button to penColor slot
     connect(ui->colorButton, &QPushButton::clicked, this, &Canvas::penColor);
-
+    ui->canvas_space->setFixedSize(width, height);
     // Задаем стиль для canvas_space
     // Устанавливаем стиль ТОЛЬКО для canvas_space
     ui->canvas_space->setStyleSheet(
