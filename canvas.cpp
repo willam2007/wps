@@ -49,8 +49,6 @@ Canvas::Canvas(int width, int height, QWidget *parent)
         "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
         "                              stop:0 #ecf0f1, stop:1 #bdc3c7);"
         "    padding: 10px;"
-        "    min-width: 200px;"
-        "    max-width: 300px;"
         "    margin: 5px;"
         "}"
         "QWidget#pen_page, QWidget#inactive_page {"
@@ -115,22 +113,6 @@ void Canvas::about()
     // Заголовок окна и текст для отображения
     QMessageBox::about(this, tr("О WPS"),
                        tr("<p>На этом этапе все делал Артём. Какой он молодец</p>"));
-}
-
-// Открывает диалог для изменения толщины пера
-void Canvas::penWidth()
-{
-    bool ok; // Переменная для проверки, нажата ли кнопка OK
-
-    // Создаем диалог выбора толщины пера
-    int newWidth = QInputDialog::getInt(this, tr("Scribble"),
-                                        tr("Выберите толщину пера:"),
-                                        scribbleArea->penWidth(),
-                                        1, 50, 1, &ok);
-
-    // Устанавливаем толщину пера, если OK нажата
-    if (ok)
-        scribbleArea->setPenWidth(newWidth);
 }
 
 // Функция для открытия изображения
