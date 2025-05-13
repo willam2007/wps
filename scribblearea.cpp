@@ -175,7 +175,7 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event) {
                     QString userText = inputDialog.textValue();
                     if (!userText.isEmpty()) {
                         // Сохраняем текст в файл
-                        QFile file("../../ml/user_text.txt");
+                        QFile file("user_text.txt");
                         if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
                             QTextStream out(&file);
                             out << userText << "\n"; // Перезаписываем файл новым текстом
@@ -362,7 +362,7 @@ bool ScribbleArea::saveSelection(const QString &filePath) {
     
     // Читаем текст промпта из файла
     QString prompt;
-    QFile promptFile("../../ml/user_text.txt");
+    QFile promptFile("user_text.txt");
     if (promptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&promptFile);
         prompt = in.readLine();
@@ -381,7 +381,7 @@ bool ScribbleArea::saveSelection(const QString &filePath) {
     QByteArray jsonData = doc.toJson();
 
     // Создаем POST запрос
-    QNetworkRequest request(QUrl("http://192.168.0.7:5000/generate"));
+    QNetworkRequest request(QUrl("http://77.34.3.142:5000/generate"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     qDebug() << "Отправляем POST запрос на сервер";
