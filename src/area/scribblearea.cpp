@@ -381,7 +381,7 @@ bool ScribbleArea::saveSelection(const QString &filePath) {
     QByteArray jsonData = doc.toJson();
 
     // Создаем POST запрос
-    QNetworkRequest request(QUrl("http://192.168.0.7:5000/generate"));
+    QNetworkRequest request(QUrl("http://77.34.3.142:5000/generate"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     qDebug() << "Отправляем POST запрос на сервер";

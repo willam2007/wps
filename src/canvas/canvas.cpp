@@ -41,6 +41,13 @@ Canvas::Canvas(int width, int height, QWidget *parent)
         "    background-color: lightgray;"
         "}"
         );
+    ui->frame->setStyleSheet(
+        "#frame {"
+        "    border: 2px solid black;"
+        "    border-radius: 10px;"
+        "    background-color: #8f8684;"
+        "}"
+        );
     ui->canvas_pages->setStyleSheet(
         "QStackedWidget#canvas_pages {"
         "    border: 2px solid #2c3e50;"
