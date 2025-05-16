@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "../canvas/canvas.h"
 #include "../choose/choose.h"
+#include "../other/rainbowlabel.h"
 
 #include <QtWidgets>
 #include <QDebug>
@@ -13,6 +14,23 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setAttribute(Qt::WA_StaticContents); // Устанавливаем атрибут статического содержимого
     ui->setupUi(this);  // Настраиваем интерфейс из файла .ui
+    // Минималистичный современный стиль для окна и элементов
+    QString style = "QMainWindow { background-color:rgb(36, 36, 36); } "
+                    "QFrame { background-color: transparent; border: none; } "
+                    "QLabel { color: #f7f7fa; font-size: 25px; font-weight: 500; letter-spacing: 0.5px; } "
+                    "QPushButton { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 16px; padding: 10px 32px; font-size: 17px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; } "
+                    "QPushButton:hover { background-color:rgb(237, 148, 161); color: #232946; } "
+                    "QPushButton:pressed { background-color:rgb(241, 118, 136); color:rgb(26, 25, 25); } ";
+    this->setStyleSheet(style);
+    this->setFixedSize(382,195);
+
+    // Заменяем QLabel на RainbowLabel для анимации текста
+    RainbowLabel *rainbowLabel = new RainbowLabel(this);
+    rainbowLabel->setText("Ваш WPS");
+    rainbowLabel->setAlignment(Qt::AlignCenter);
+    rainbowLabel->setGeometry(0, 40, 382, 40);
+    rainbowLabel->setFont(QFont("Segoe UI", 40, QFont::Bold));
+    rainbowLabel->show();
 }
 
 // Обработчик нажатия кнопки "Создать проект"

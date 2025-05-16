@@ -1,5 +1,4 @@
 #include "mainwindow/mainwindow.h"
-//#include "canvas/canvas.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -20,8 +19,6 @@ int main(int argc, char *argv[])
     }
 
     MainWindow w;
-    //Canvas c;
-    w.setFixedSize(280, 215);
     w.show();
 
     return a.exec();

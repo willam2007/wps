@@ -25,12 +25,14 @@ set(PROJECT_SOURCES
         src/area/scribblearea.cpp
         src/canvas/canvas.cpp
         src/choose/choose.cpp
+        src/other/rainbowlabel.cpp
 
     #headers files
         src/mainwindow/mainwindow.h
         src/area/scribblearea.h
         src/canvas/canvas.h
         src/choose/choose.h
+        src/other/rainbowlabel.h
     
     #ui files
         src/mainwindow/mainwindow.ui
