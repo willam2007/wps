@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>396</width>
-    <height>251</height>
+    <width>393</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -24,20 +24,105 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="5" colspan="2">
-     <spacer name="horizontalSpacer_4">
+    <item row="1" column="1" colspan="5">
+     <widget class="QLabel" name="label_2">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>99</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Выбирите Размер</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1" colspan="2">
+     <widget class="QPushButton" name="pushButton_1280_720">
+      <property name="text">
+       <string>1290x720</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="4" colspan="2">
+     <widget class="QPushButton" name="pushButton_random">
+      <property name="text">
+       <string>Случайный</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <spacer name="verticalSpacer_2">
       <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Policy::Fixed</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>35</width>
-        <height>20</height>
+        <width>20</width>
+        <height>50</height>
        </size>
       </property>
      </spacer>
     </item>
-    <item row="3" column="0" colspan="8">
+    <item row="3" column="1" colspan="2">
+     <widget class="QPushButton" name="pushButton_1920_1080">
+      <property name="text">
+       <string>1920x1080</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" rowspan="2">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Policy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="3" column="4" colspan="2">
+     <widget class="QPushButton" name="pushButton__1080_1080">
+      <property name="text">
+       <string>1080x1080</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="6" rowspan="2">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Policy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>10</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="0" colspan="7">
      <widget class="QFrame" name="frame">
       <property name="minimumSize">
        <size>
@@ -99,18 +184,58 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>6</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <widget class="QSpinBox" name="spinBox_width">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>60</width>
-              <height>20</height>
+              <width>20</width>
+              <height>0</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="frame">
+             <bool>false</bool>
             </property>
             <property name="minimum">
              <number>50</number>
@@ -129,11 +254,11 @@
              <enum>Qt::Orientation::Horizontal</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Policy::Expanding</enum>
+             <enum>QSizePolicy::Policy::Fixed</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>220</width>
+              <width>100</width>
               <height>20</height>
              </size>
             </property>
@@ -142,14 +267,14 @@
           <item>
            <widget class="QSpinBox" name="spinBox_height">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>60</width>
+              <width>40</width>
               <height>20</height>
              </size>
             </property>
@@ -164,13 +289,29 @@
             </property>
            </widget>
           </item>
+          <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>1</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
         </widget>
        </item>
        <item>
         <widget class="QFrame" name="frame_2">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -191,7 +332,7 @@
           <item>
            <widget class="QPushButton" name="pushButton_create">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -210,7 +351,7 @@
           <item>
            <widget class="QPushButton" name="pushButton_back">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -232,64 +373,10 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="3" colspan="2">
-     <widget class="QLabel" name="label_2">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>99</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Выбирите Размер</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" rowspan="2">
-     <spacer name="horizontalSpacer_2">
+    <item row="2" column="1">
+     <spacer name="verticalSpacer">
       <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Policy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="1" colspan="2">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Policy::Expanding</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>35</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="7" rowspan="2">
-     <spacer name="horizontalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
+       <enum>Qt::Orientation::Vertical</enum>
       </property>
       <property name="sizeType">
        <enum>QSizePolicy::Policy::Fixed</enum>
@@ -301,34 +388,6 @@
        </size>
       </property>
      </spacer>
-    </item>
-    <item row="1" column="5" colspan="2">
-     <widget class="QPushButton" name="pushButton__1080_1080">
-      <property name="text">
-       <string>1080x1080</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="5" colspan="2">
-     <widget class="QPushButton" name="pushButton_random">
-      <property name="text">
-       <string>Случайный</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1" colspan="2">
-     <widget class="QPushButton" name="pushButton_1280_720">
-      <property name="text">
-       <string>1290x720</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1" colspan="2">
-     <widget class="QPushButton" name="pushButton_1920_1080">
-      <property name="text">
-       <string>1920x1080</string>
-      </property>
-     </widget>
     </item>
    </layout>
   </widget>
