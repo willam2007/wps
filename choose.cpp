@@ -1,6 +1,7 @@
 #include "choose.h"
 #include "canvas.h"
 #include "ui_choose.h"
+#include "rainbowlabel.h"
 
 #include <qboxlayout.h>
 #include <qpainter.h>
@@ -12,8 +13,27 @@ Choose::Choose(QWidget *parent)
     , ui(new Ui::Choose)
 {
     ui->setupUi(this); // Настраиваем интерфейс из файла .ui
-    setFixedSize(size()); // Фиксируем текущий размер окна
-    // Create window fade-in animation
+    this->setFixedSize(size()); // Фиксируем текущий размер окна
+    // Применяем современный минималистичный стиль
+    setStyleSheet("QMainWindow { background: rgb(36, 36, 36); }\n"
+                  "QPushButton { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 12px; padding: 10px 28px; font-size: 14px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; } \n"
+                  "QPushButton:hover { background-color:rgb(237, 148, 161); color: #232946; }\n"
+                  "QPushButton:pressed { background-color:rgb(241, 118, 136); color:rgb(26, 25, 25); }\n"
+                  "QLabel { color: #f7f7fa; font-size: 18px; font-weight: 500; letter-spacing: 0.5px; } \n"
+                  "QSpinBox { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 16px; padding: 10px 18px; font-size: 14px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; }\n"
+                  "QSpinBox::up-arrow { color: #f7f7fa; }\n"
+                  "QSpinBox::down-arrow { color: #f7f7fa; }\n"
+                  "QSpinBox::up-button, QSpinBox::down-button { width: 24px; height: 24px; }\n"
+                  "QGroupBox { border: 1px solid #444; border-radius: 12px; margin-top: 10px; color: #fff; font-size: 16px; }\n"
+                  "QGroupBox:title { subcontrol-origin: margin; left: 10px; padding: 0 3px 0 3px; }\n");
+
+    // Заменяем QLabel на RainbowLabel для анимации текста
+    RainbowLabel *rainbowLabel = new RainbowLabel(this);
+    rainbowLabel->setText("Ваш WPS");
+    rainbowLabel->setAlignment(Qt::AlignCenter);
+    rainbowLabel->setGeometry(0, 15, 382, 40);
+    rainbowLabel->setFont(QFont("Segoe UI", 55, QFont::Bold));
+    rainbowLabel->show();
 }
 
 void Choose::on_pushButton_1920_1080_clicked()
