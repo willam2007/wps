@@ -30,6 +30,8 @@ set(PROJECT_SOURCES
         choose.h
         choose.cpp
         choose.ui
+        rainbowlabel.h
+        rainbowlabel.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 5)
