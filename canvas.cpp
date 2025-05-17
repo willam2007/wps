@@ -18,7 +18,24 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     //setAttribute(Qt::WA_StaticContents); // Устанавливаем статическое содержимое
     ui->setupUi(this); // Настраиваем интерфейс из файла .ui
     ui->canvas_pages->setCurrentWidget(ui->inactive_page);
-    
+    // Минималистичный современный стиль для окна и элементов
+    QString style = "QMainWindow { background-color:rgb(36, 36, 36); } "
+                    "QLabel { color: #f7f7fa; font-size: 20px; font-weight: 500; letter-spacing: 0.5px; } "
+                    "QPushButton { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 14px; padding: 8px 28px; font-size: 16px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; } "
+                    "QPushButton:hover { background-color:rgb(237, 148, 161); color: #232946; } "
+                    "QPushButton:pressed { background-color:rgb(241, 118, 136); color:rgb(26, 25, 25); } ";
+    this->setStyleSheet(style);
+    // Стилизация canvas_space и frame
+    ui->canvas_space->setStyleSheet("#canvas_space { background-color: #232946; }");
+    ui->frame_2->setStyleSheet("#frame_2 { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36);  }");
+    ui->frame->setStyleSheet("#frame { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36); padding: 10px; margin: 5px; }");
+    ui->canvas_pages->setStyleSheet(
+        "QStackedWidget#canvas_pages { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36); padding: 10px; margin: 5px; } "
+        "QWidget#pen_page, QWidget#inactive_page { background: transparent; } "
+        "QLabel { color: #f7f7fa; font-size: 16px; font-weight: 500; letter-spacing: 0.5px; } "
+        "QSlider::groove:horizontal { border: 1px solid #bdc3c7; height: 8px; background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dfe6e9, stop:1 #b2bec3); margin: 2px 0; border-radius: 4px; } "
+        "QSlider::handle:horizontal { background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #2980b9, stop:1 #3498db); border: 1px solid #2980b9; width: 18px; margin: -5px 0; border-radius: 9px; } "
+    );
     // Create window fade-in animation
     QPropertyAnimation* windowFadeIn = new QPropertyAnimation(this, "windowOpacity");
     windowFadeIn->setDuration(600);
@@ -32,63 +49,18 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     // Connect color button to penColor slot
     connect(ui->colorButton, &QPushButton::clicked, this, &Canvas::penColor);
 
-    // Задаем стиль для canvas_space
-    // Устанавливаем стиль ТОЛЬКО для canvas_space
-    ui->canvas_space->setStyleSheet(
-        "#canvas_space {"
-        "    border: 2px solid black;"
-        "    border-radius: 10px;"
-        "    background-color: lightgray;"
-        "}"
-        );
-    ui->frame->setStyleSheet(
-        "#frame {"
-        "    border: 2px solid black;"
-        "    border-radius: 10px;"
-        "    background-color: #8f8684;"
-        "}"
-        );
-    ui->canvas_space->setFixedSize(width, height);
-    ui->canvas_pages->setStyleSheet(
-        "QStackedWidget#canvas_pages {"
-        "    border: 2px solid #2c3e50;"
-        "    border-radius: 15px;"
-        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-        "                              stop:0 #ecf0f1, stop:1 #bdc3c7);"
-        "    padding: 10px;"
-        "    margin: 5px;"
-        "}"
-        "QWidget#pen_page, QWidget#inactive_page {"
-        "    background: transparent;"
-        "}"
-        "QSlider::groove:horizontal {"
-        "    border: 1px solid #bdc3c7;"
-        "    height: 8px;"
-        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-        "                              stop:0 #dfe6e9, stop:1 #b2bec3);"
-        "    margin: 2px 0;"
-        "    border-radius: 4px;"
-        "}"
-        "QSlider::handle:horizontal {"
-        "    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, "
-        "                              stop:0 #2980b9, stop:1 #3498db);"
-        "    border: 1px solid #2980b9;"
-        "    width: 18px;"
-        "    margin: -5px 0;"
-        "    border-radius: 9px;"
-        "}"
-        "QLabel {"
-        "    color: #2c3e50;"
-        "    font-size: 14px;"
-        "    font-weight: bold;"
-        "}"
-    );
-
+    //ui->canvas_space->setFixedSize(width, height);
+    ui->canvas_space->setFixedSize(1800, 1080);
     // Set up fade effect for page transitions
     QGraphicsOpacityEffect *effect = new QGraphicsOpacityEffect(ui->canvas_pages);
     ui->canvas_pages->setGraphicsEffect(effect);
     effect->setOpacity(1.0);
-
+    // Подключаем кнопки инструментов из панели frame
+    connect(ui->penButton, &QPushButton::clicked, this, &Canvas::on_actionPen_triggered);
+    connect(ui->selectingButton, &QPushButton::clicked, this, &Canvas::on_actionSelecting_triggered);
+    connect(ui->clearButton, &QPushButton::clicked, this, &Canvas::on_actionClear_triggered);
+    connect(ui->resetButton, &QPushButton::clicked, this, &Canvas::on_actionReset_triggered);
+    connect(ui->noneButton, &QPushButton::clicked, this, &Canvas::on_actionNone_triggered);
 }
 
 // Пользователь пытается закрыть приложение
