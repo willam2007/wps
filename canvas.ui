@@ -34,7 +34,7 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>120</width>
+        <width>190</width>
         <height>40</height>
        </size>
       </property>
@@ -48,35 +48,35 @@
        <item>
         <widget class="QPushButton" name="penButton">
          <property name="text">
-          <string>Pen</string>
+          <string>Перо</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="selectingButton">
          <property name="text">
-          <string>Selecting</string>
+          <string>Выбор области</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="clearButton">
          <property name="text">
-          <string>Clear</string>
+          <string>Очистить</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="resetButton">
          <property name="text">
-          <string>Reset</string>
+          <string>Сбросить</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="noneButton">
          <property name="text">
-          <string>None</string>
+          <string>Без выбора</string>
          </property>
         </widget>
        </item>

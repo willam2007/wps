@@ -21,7 +21,7 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     // Минималистичный современный стиль для окна и элементов
     QString style = "QMainWindow { background-color:rgb(36, 36, 36); } "
                     "QLabel { color: #f7f7fa; font-size: 20px; font-weight: 500; letter-spacing: 0.5px; } "
-                    "QPushButton { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 14px; padding: 8px 28px; font-size: 16px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; } "
+                    "QPushButton { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 14px; padding: 4px 12px; font-size: 16px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; } "
                     "QPushButton:hover { background-color:rgb(237, 148, 161); color: #232946; } "
                     "QPushButton:pressed { background-color:rgb(241, 118, 136); color:rgb(26, 25, 25); } ";
     this->setStyleSheet(style);
@@ -49,8 +49,16 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     // Connect color button to penColor slot
     connect(ui->colorButton, &QPushButton::clicked, this, &Canvas::penColor);
 
+
+
+
+
     //ui->canvas_space->setFixedSize(width, height);
-    ui->canvas_space->setFixedSize(1800, 1080);
+    ui->canvas_space->setFixedSize(1780, 1080);
+
+
+
+
     // Set up fade effect for page transitions
     QGraphicsOpacityEffect *effect = new QGraphicsOpacityEffect(ui->canvas_pages);
     ui->canvas_pages->setGraphicsEffect(effect);
