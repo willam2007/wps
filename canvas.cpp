@@ -82,6 +82,9 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     connect(ui->clearButton, &QPushButton::clicked, this, &Canvas::on_actionClear_triggered);
     connect(ui->resetButton, &QPushButton::clicked, this, &Canvas::on_actionReset_triggered);
     connect(ui->noneButton, &QPushButton::clicked, this, &Canvas::on_actionNone_triggered);
+    connect(ui->openButton, &QPushButton::clicked, this, &Canvas::openIm);
+    connect(ui->saveButton, &QPushButton::clicked, [this]() { saveFile("png"); });
+    connect(ui->aboutButton, &QPushButton::clicked, this, &Canvas::about);
 }
 
 // Пользователь пытается закрыть приложение
