@@ -1,6 +1,7 @@
 #include "canvas.h"
 #include "ui_canvas.h"
 #include "scribblearea.h"
+#include "mainwindow.h"
 
 #include <qboxlayout.h>
 #include <qpainter.h>
@@ -112,11 +113,16 @@ void Canvas::openIm()
 
         // Открываем диалог выбора файла
         QString fileName = QFileDialog::getOpenFileName(this,
-                                                        tr("Open File"), dir.absolutePath());
+                                                        tr("Открыть проект"), dir.absolutePath());
         // Если выбрали файл, загружаем его в scribbleArea
         if (!fileName.isEmpty()) {
             QSize canvasSize = getCanvasSpaceSize(); // Получаем размер canvas_space
             scribbleArea->openImage(fileName, canvasSize); // Передаем файл и размер
+            this->show();
+        } else {
+            MainWindow *mainWindow = new MainWindow();
+            mainWindow->show();
+            this->close();
         }
     }
 }

@@ -49,6 +49,5 @@ void MainWindow::on_choose_button_project_clicked()
     canvas->show();
     canvas->hide();
     canvas->openIm();
-    canvas->show();
     this->hide();
 }

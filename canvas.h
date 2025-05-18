@@ -3,6 +3,7 @@
 
 #include "scribblearea.h"
 #include "ui_canvas.h"
+#include "mainwindow.h"
 
 #include <QMainWindow>
 #include <qpropertyanimation.h>
@@ -40,6 +41,7 @@ private slots:
 private:
     Ui::Canvas *ui;
     ScribbleArea *scribbleArea;
+    MainWindow *mainWindow;
     QPropertyAnimation *fadeAnimation;
 
     bool maybeSave();
