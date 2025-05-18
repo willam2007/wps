@@ -2,6 +2,7 @@
 #include "ui_canvas.h"
 #include "scribblearea.h"
 #include "mainwindow.h"
+#include "rainbowlabel.h"
 
 #include <qboxlayout.h>
 #include <qpainter.h>
@@ -18,6 +19,14 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     
     //setAttribute(Qt::WA_StaticContents); // Устанавливаем статическое содержимое
     ui->setupUi(this); // Настраиваем интерфейс из файла .ui
+
+    RainbowLabel *rainbowLabel = findChild<RainbowLabel*>("WPSLabel");
+    if (rainbowLabel) {
+        rainbowLabel->setText("Ваш WPS");
+        rainbowLabel->setAlignment(Qt::AlignCenter);
+        rainbowLabel->setFont(QFont("Segoe UI", 32, QFont::Bold));
+    }
+
     ui->canvas_pages->setCurrentWidget(ui->inactive_page);
     // Минималистичный современный стиль для окна и элементов
     QString style = "QMainWindow { background-color:rgb(36, 36, 36); } "
@@ -34,8 +43,8 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     ui->frame_2->setStyleSheet("#frame_2 { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36);  }");
     ui->frame->setStyleSheet("#frame { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36); padding: 10px; margin: 5px; }");
     ui->canvas_pages->setStyleSheet(
-        "QStackedWidget#canvas_pages { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36); padding: 10px; margin: 5px; } "
-        "QWidget#pen_page, QWidget#inactive_page { background: transparent; } "
+        "QStackedWidget#canvas_pages { background: rgb(36, 36, 36); } "
+        "QWidget#pen_page, QWidget#selecting_page { border: 2px solid #eebbc3; border-radius: 15px; padding: 10px; margin: 5px; } "
         "QLabel { color: #f7f7fa; font-size: 16px; font-weight: 500; letter-spacing: 0.5px; } "
         "QSlider::groove:horizontal { border: 1px solid #bdc3c7; height: 8px; background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dfe6e9, stop:1 #b2bec3); margin: 2px 0; border-radius: 4px; } "
         "QSlider::handle:horizontal { background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #2980b9, stop:1 #3498db); border: 1px solid #2980b9; width: 18px; margin: -5px 0; border-radius: 9px; } "
@@ -232,7 +241,7 @@ void Canvas::on_actionNone_triggered()
 {
     scribbleArea->setMode(ScribbleArea::Inactive); // Обработчик нажатия выбора режима
     setupPageTransition(ui->inactive_page);
-};
+}
 
 void Canvas::on_actionReset_triggered()
 {
@@ -240,4 +249,11 @@ void Canvas::on_actionReset_triggered()
     scribbleArea->setZoomFactor(1.0);
     scribbleArea->resetViewport();
     update();
+}
+
+void Canvas::on_actionSelecting_triggered()
+{
+    // Устанавливаем режим выделения для ScribbleArea
+    scribbleArea->setMode(ScribbleArea::Selecting);
+    setupPageTransition(ui->selecting_page);
 }

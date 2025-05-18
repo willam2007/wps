@@ -100,6 +100,13 @@
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="RainbowLabel" name="WPSLabel">
+         <property name="text">
+          <string>Ваш WPS</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
@@ -182,7 +189,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="penLabel">
           <property name="text">
            <string>Параметры пера</string>
           </property>
@@ -313,6 +320,7 @@ QPushButton:pressed {
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="selecting_page"/>
      </widget>
     </item>
    </layout>
