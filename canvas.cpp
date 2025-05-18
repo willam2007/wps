@@ -24,7 +24,10 @@ Canvas::Canvas(int width, int height, QWidget *parent)
                     "QLabel { color: #f7f7fa; font-size: 20px; font-weight: 500; letter-spacing: 0.5px; } "
                     "QPushButton { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 14px; padding: 4px 12px; font-size: 16px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; } "
                     "QPushButton:hover { background-color:rgb(237, 148, 161); color: #232946; } "
-                    "QPushButton:pressed { background-color:rgb(241, 118, 136); color:rgb(26, 25, 25); } ";
+                    "QPushButton:pressed { background-color:rgb(241, 118, 136); color:rgb(26, 25, 25); } "
+                    "QMessageBox { background-color: rgb(36, 36, 36); color: #f7f7fa; font-size: 18px; } "
+                    "QMessageBox QLabel { color: #f7f7fa; font-size: 20px; font-weight: 500; letter-spacing: 0.5px; } "
+                    "QMessageBox QPushButton { background-color: #eebbc3; color: #232946; border-radius: 10px; padding: 4px 16px; font-size: 16px; } ";
     this->setStyleSheet(style);
     // Стилизация canvas_space и frame
     ui->canvas_space->setStyleSheet("#canvas_space { background-color: #232946; }");
@@ -132,20 +135,17 @@ bool Canvas::maybeSave()
 {
     // Проверяем, были ли изменения
     if (scribbleArea->isModified()) {
-        QMessageBox::StandardButton ret;
-
-        // Показываем диалоговое окно с предложением сохранить изменения
-        ret = QMessageBox::warning(this, tr("Уверены?"),
-                                   tr("Изображение было изменено.\n"
-                                      "Хотите сохранить изменения?"),
-                                   QMessageBox::Yes | QMessageBox::Cancel
-                                       | QMessageBox::No);
-
-        // Если нажали "Сохранить", вызываем сохранение
-        if (ret == QMessageBox::Yes) {
+        QMessageBox msgBox(this);
+        msgBox.setWindowTitle(tr("Уверены?"));
+        msgBox.setText(tr("Изображение было изменено.\nХотите сохранить изменения?"));
+        QPushButton *yesButton = msgBox.addButton(tr("Да"), QMessageBox::YesRole);
+        QPushButton *noButton = msgBox.addButton(tr("Нет"), QMessageBox::NoRole);
+        QPushButton *cancelButton = msgBox.addButton(tr("Отмена"), QMessageBox::RejectRole);
+        msgBox.setDefaultButton(yesButton);
+        msgBox.exec();
+        if (msgBox.clickedButton() == yesButton) {
             return saveFile("png");
-        } else if (ret == QMessageBox::Cancel) {
-            // Если нажали "Отмена", не закрываем окно
+        } else if (msgBox.clickedButton() == cancelButton) {
             return false;
         }
     }
