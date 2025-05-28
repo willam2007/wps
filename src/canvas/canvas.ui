@@ -46,6 +46,20 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
+        <widget class="QPushButton" name="openButton">
+         <property name="text">
+          <string>Открыть</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="saveButton">
+         <property name="text">
+          <string>Сохранить</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="penButton">
          <property name="text">
           <string>Перо</string>
@@ -88,6 +102,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="aboutButton">
+         <property name="text">
+          <string>О программе</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_5">
          <property name="orientation">
           <enum>Qt::Orientation::Vertical</enum>
@@ -99,6 +120,13 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="RainbowLabel" name="WPSLabel" native="true">
+         <property name="text" stdset="0">
+          <string>Ваш WPS</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -182,7 +210,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="penLabel">
           <property name="text">
            <string>Параметры пера</string>
           </property>
@@ -313,6 +341,7 @@ QPushButton:pressed {
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="selecting_page"/>
      </widget>
     </item>
    </layout>
@@ -326,21 +355,6 @@ QPushButton:pressed {
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuOpen">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="open_button_canvas"/>
-    <addaction name="save_button_canvas"/>
-    <addaction name="actionAbout"/>
-   </widget>
-   <widget class="QMenu" name="menuOptions">
-    <property name="title">
-     <string>Options</string>
-    </property>
-   </widget>
-   <addaction name="menuOpen"/>
-   <addaction name="menuOptions"/>
   </widget>
   <action name="open_button_canvas">
    <property name="text">
@@ -388,6 +402,13 @@ QPushButton:pressed {
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RainbowLabel</class>
+   <extends>QWidget</extends>
+   <header>rainbowlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
