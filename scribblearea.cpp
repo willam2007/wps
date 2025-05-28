@@ -127,47 +127,24 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event) {
             while (true) {
                 QInputDialog inputDialog;
                 inputDialog.setWindowTitle(tr("Введите текст"));
-                inputDialog.setLabelText(tr("Введите текст для сохранения:"));
+                inputDialog.setLabelText(tr("Введите текст для отправки:"));
                 inputDialog.setInputMode(QInputDialog::TextInput);
                 inputDialog.setTextValue(""); // Пустое значение по умолчанию
 
                 // Устанавливаем стиль
                 inputDialog.setStyleSheet(R"(
                     QDialog {
-                        background-color: #f0f0f0;
-                        border: 2px solid #5a5a5a;
-                        border-radius: 10px;
+                        background: rgb(36, 36, 36);
+                        border: 2px solid #eebbc3;
+                        border-radius: 15px;
                     }
-                    QLabel {
-                        font-size: 14px;
-                        color: #333333;
-                    }
-                    QLineEdit {
-                        background-color: #ffffff;
-                        border: 1px solid #cccccc;
-                        border-radius: 5px;
-                        padding: 5px;
-                        font-size: 14px;
-                    }
-                    QPushButton {
-                        background-color: #4CAF50;
-                        border: none;
-                        color: white;
-                        padding: 10px 20px;
-                        text-align: center;
-                        text-decoration: none;
-                        display: inline-block;
-                        font-size: 14px;
-                        margin: 4px 2px;
-                        cursor: pointer;
-                        border-radius: 5px;
-                    }
-                    QPushButton:hover {
-                        background-color: #45a049;
-                    }
-                    QPushButton:pressed {
-                        background-color: #3e8e41;
-                    }
+                    QLabel { color: #f7f7fa; font-size: 20px; font-weight: 500; letter-spacing: 0.5px; }
+                    QPushButton { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 14px; padding: 4px 12px; font-size: 16px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; }
+                    QPushButton:hover { background-color:rgb(237, 148, 161); color: #232946; }
+                    QPushButton:pressed { background-color:rgb(241, 118, 136); color:rgb(26, 25, 25); }
+                    QLabel { color: #f7f7fa; font-size: 20px; font-weight: 500; letter-spacing: 0.5px; }
+                    QPushButton { background-color: #eebbc3; color: #232946; border-radius: 10px; padding: 4px 16px; font-size: 16px; }
+
                 )");
 
                 // Обрабатываем результат
