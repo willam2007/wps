@@ -18,7 +18,7 @@ class ScribbleArea : public QWidget
 
 public:
     // Определяем режимы работы ScribbleArea
-    enum Mode { Inactive, Drawing, Selecting };
+    enum Mode { Inactive, Drawing, Selecting, Erasing, Text };
 
     ScribbleArea(QWidget *parent = nullptr);
 
@@ -32,12 +32,19 @@ public:
     void setPenWidth(int newWidth);
     // Сохранить выделенную область в файл
     bool saveSelection(const QString &filePath = "ml/selection.png");
+    
+    // Методы для работы с текстом
+    void setTextFont(const QFont &font);
+    void setTextColor(const QColor &color);
+    void setTextContent(const QString &text);
+    QFont getTextFont() const { return textFont; }
+    QColor getTextColor() const { return textColor; }
 
     // Проверка на наличие изменений
     bool isModified() const;
-    // Получить текущий цвет пера
+    // Получить цвет пера
     QColor penColor() const { return myPenColor; }
-    // Получить текущую ширину пера
+    // Получить ширину пера
     int penWidth() const { return myPenWidth; }
     // Установить режим работы (рисование, выделение и т.д.)
     void setMode(Mode newMode);
@@ -84,6 +91,13 @@ private:
     QRect selectionRect;    // Прямоугольник выделенной области
     Mode currentMode;       // Текущий режим работы ScribbleArea
     QNetworkAccessManager *networkManager; // Менеджер сетевых запросов
+    
+    // Переменные для работы с текстом
+    QString textContent;
+    QFont textFont;
+    QColor textColor;
+    QPoint textPosition;
+    bool addingText;
 };
 
 #endif // SCRIBBLEAREA_H

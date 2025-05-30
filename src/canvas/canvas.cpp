@@ -37,12 +37,12 @@ Canvas::Canvas(int width, int height, QWidget *parent)
                     "QMessageBox QPushButton { background-color: #eebbc3; color: #232946; border-radius: 10px; padding: 4px 16px; font-size: 16px; } ";
     this->setStyleSheet(style);
     // Стилизация canvas_space и frame
-    ui->canvas_space->setStyleSheet("#canvas_space { background-color: #232946; }");
+    ui->canvas_space->setStyleSheet("#canvas_space { background-color:rgb(159, 160, 161); }");
     ui->frame_2->setStyleSheet("#frame_2 { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36);  }");
     ui->frame->setStyleSheet("#frame { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36); padding: 10px; margin: 5px; }");
     ui->canvas_pages->setStyleSheet(
         "QStackedWidget#canvas_pages { background: rgb(36, 36, 36); } "
-        "QWidget#pen_page, QWidget#selecting_page { border: 2px solid #eebbc3; border-radius: 15px; padding: 10px; margin: 5px; } "
+        "QWidget#pen_page, QWidget#selecting_page, QWidget#text_page { border: 2px solid #eebbc3; border-radius: 15px; padding: 10px; margin: 5px; } "
         "QLabel { color: #f7f7fa; font-size: 16px; font-weight: 500; letter-spacing: 0.5px; } "
         "QSlider::groove:horizontal { border: 1px solid #bdc3c7; height: 8px; background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dfe6e9, stop:1 #b2bec3); margin: 2px 0; border-radius: 4px; } "
         "QSlider::handle:horizontal { background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #2980b9, stop:1 #3498db); border: 1px solid #2980b9; width: 18px; margin: -5px 0; border-radius: 9px; } "
@@ -59,6 +59,10 @@ Canvas::Canvas(int width, int height, QWidget *parent)
 
     // Connect color button to penColor slot
     connect(ui->colorButton, &QPushButton::clicked, this, &Canvas::penColor);
+    
+    // Connect text color and font buttons to their slots
+    connect(ui->textColorButton, &QPushButton::clicked, this, &Canvas::textColor);
+    connect(ui->fontButton, &QPushButton::clicked, this, &Canvas::textFont);
 
 
 
@@ -77,6 +81,7 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     // Подключаем кнопки инструментов из панели frame
     connect(ui->penButton, &QPushButton::clicked, this, &Canvas::on_actionPen_triggered);
     connect(ui->selectingButton, &QPushButton::clicked, this, &Canvas::on_actionSelecting_triggered);
+    connect(ui->textButton, &QPushButton::clicked, this, &Canvas::on_actionText_triggered);
     connect(ui->clearButton, &QPushButton::clicked, this, &Canvas::on_actionClear_triggered);
     connect(ui->resetButton, &QPushButton::clicked, this, &Canvas::on_actionReset_triggered);
     connect(ui->noneButton, &QPushButton::clicked, this, &Canvas::on_actionNone_triggered);
@@ -258,4 +263,33 @@ void Canvas::on_actionSelecting_triggered()
     // Устанавливаем режим выделения для ScribbleArea
     scribbleArea->setMode(ScribbleArea::Selecting);
     setupPageTransition(ui->selecting_page);
+}
+
+void Canvas::on_actionText_triggered()
+{
+    // Устанавливаем режим текста для ScribbleArea
+    scribbleArea->setMode(ScribbleArea::Text);
+    setupPageTransition(ui->text_page);
+}
+
+// Открывает диалог для изменения цвета текста
+void Canvas::textColor()
+{
+    // Сохраняем выбранный цвет из диалога
+    QColor newColor = QColorDialog::getColor(scribbleArea->getTextColor());
+
+    // Если цвет валиден, устанавливаем его
+    if (newColor.isValid())
+        scribbleArea->setTextColor(newColor);
+}
+
+// Открывает диалог для изменения шрифта текста
+void Canvas::textFont()
+{
+    bool ok;
+    QFont newFont = QFontDialog::getFont(&ok, scribbleArea->getTextFont(), this, tr("Выбор шрифта"));
+    
+    if (ok) {
+        scribbleArea->setTextFont(newFont);
+    }
 }

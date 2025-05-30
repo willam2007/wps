@@ -33,11 +33,14 @@ private slots:
     bool on_save_button_canvas_triggered() {return saveFile("png");}; // Обработчик нажатия кнопки сохранения проекта
     void on_actionPen_triggered(); // Обработчик нажатия выбора режима рисования
     void on_actionSelecting_triggered(); // Обработчик нажатия выбора режима выбора
+    void on_actionText_triggered(); // Обработчик нажатия выбора режима текста
     void on_actionAbout_triggered() {this->about();}; // Обработчик нажатия кнопки о нашем WPS
     void on_actionClear_triggered() {scribbleArea->clearImage();}; // Обработчик нажатия очистки холста
     void on_actionNone_triggered(); // Обработчик нажатия выбора режима
     void on_horizontalSlider_valueChanged(int value) {scribbleArea->setPenWidth(value);};
     void on_actionReset_triggered();
+    void textColor(); // Обработчик изменения цвета текста
+    void textFont(); // Обработчик изменения шрифта текста
 
 private:
     Ui::Canvas *ui;

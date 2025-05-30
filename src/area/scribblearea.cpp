@@ -21,6 +21,11 @@ ScribbleArea::ScribbleArea(QWidget *parent)
     myPenWidth = 1;
     myPenColor = Qt::blue;
     currentMode = Inactive;
+    
+    // Инициализация переменных для работы с текстом
+    textFont = QFont("Arial", 12);
+    textColor = Qt::black;
+    addingText = false;
         
     // Инициализируем сетевой менеджер
     networkManager = new QNetworkAccessManager(this);
@@ -28,6 +33,16 @@ ScribbleArea::ScribbleArea(QWidget *parent)
 
 void ScribbleArea::setMode(Mode newMode) {
     currentMode = newMode;
+    // Сбрасываем флаги при смене режима
+    if (currentMode != Drawing) {
+        scribbling = false;
+    }
+    if (currentMode != Selecting) {
+        selecting = false;
+    }
+    if (currentMode != Text) {
+        addingText = false;
+    }
     update();
 }
 
@@ -72,6 +87,27 @@ void ScribbleArea::setPenWidth(int newWidth)
     myPenWidth = newWidth;
 }
 
+// Установка шрифта текста
+void ScribbleArea::setTextFont(const QFont &font)
+{
+    textFont = font;
+    update();
+}
+
+// Установка цвета текста
+void ScribbleArea::setTextColor(const QColor &color)
+{
+    textColor = color;
+    update();
+}
+
+// Установка содержимого текста
+void ScribbleArea::setTextContent(const QString &text)
+{
+    textContent = text;
+    update();
+}
+
 // Заливка изображения белым цветом
 void ScribbleArea::clearImage()
 {
@@ -94,6 +130,56 @@ void ScribbleArea::mousePressEvent(QMouseEvent *event) {
         } else if (currentMode == Selecting) {
             selectionRect.setTopLeft(event->pos());
             selecting = true;
+        } else if (currentMode == Text) {
+            // Сохраняем позицию для добавления текста
+            textPosition = event->pos();
+            addingText = true;
+            
+            // Показываем диалог для ввода текста
+            QInputDialog inputDialog;
+            inputDialog.setWindowTitle(tr("Введите текст"));
+            inputDialog.setLabelText(tr("Введите текст для добавления:"));
+            inputDialog.setInputMode(QInputDialog::TextInput);
+            inputDialog.setTextValue(""); // Пустое значение по умолчанию
+
+            // Устанавливаем стиль
+            inputDialog.setStyleSheet(R"(
+                QDialog {
+                    background: rgb(36, 36, 36);
+                    border: 2px solid #eebbc3;
+                    border-radius: 15px;
+                }
+                QLabel { color: #f7f7fa; font-size: 20px; font-weight: 500; letter-spacing: 0.5px; }
+                QLineEdit { background-color: rgb(50, 50, 50); color: #f7f7fa; border: 1px solid #eebbc3; border-radius: 8px; padding: 4px; }
+                QPushButton { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 14px; padding: 4px 12px; font-size: 16px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; }
+                QPushButton:hover { background-color:rgb(237, 148, 161); color: #232946; }
+                QPushButton:pressed { background-color:rgb(241, 118, 136); color:rgb(26, 25, 25); }
+            )");
+
+            // Обрабатываем результат
+            if (inputDialog.exec() == QDialog::Accepted) {
+                QString userText = inputDialog.textValue();
+                if (!userText.isEmpty()) {
+                    // Сохраняем текст
+                    textContent = userText;
+                    
+                    // Рисуем текст на изображении
+                    QPainter painter(&image);
+                    painter.setFont(textFont);
+                    painter.setPen(textColor);
+                    
+                    // Применяем масштабирование и учитываем смещение viewport
+                    QPoint scaledPosition = ((textPosition + viewportOffset) / m_zoomFactor).toPoint();
+                    painter.drawText(scaledPosition, textContent);
+                    
+                    modified = true;
+                    update();
+                } else {
+                    QMessageBox::warning(nullptr, tr("Ошибка"), tr("Текст не может быть пустым!"));
+                }
+            }
+            
+            addingText = false;
         }
     }
 }
