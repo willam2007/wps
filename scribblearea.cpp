@@ -152,7 +152,7 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event) {
                     QString userText = inputDialog.textValue();
                     if (!userText.isEmpty()) {
                         // Сохраняем текст в файл
-                        QFile file("user_text.txt");
+                        QFile file("../ml/user_text.txt");
                         if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
                             QTextStream out(&file);
                             out << userText << "\n"; // Перезаписываем файл новым текстом
@@ -339,7 +339,7 @@ bool ScribbleArea::saveSelection(const QString &filePath) {
     
     // Читаем текст промпта из файла
     QString prompt;
-    QFile promptFile("user_text.txt");
+    QFile promptFile("../ml/user_text.txt");
     if (promptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&promptFile);
         prompt = in.readLine();
@@ -357,42 +357,84 @@ bool ScribbleArea::saveSelection(const QString &filePath) {
     QJsonDocument doc(requestData);
     QByteArray jsonData = doc.toJson();
 
-    // Создаем POST запрос
+    // Создаем POST запрос для SSE
     QNetworkRequest request(QUrl("http://77.34.3.142:5000/generate"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    qDebug() << "Отправляем POST запрос на сервер";
+    qDebug() << "Отправляем POST запрос на сервер для SSE";
     qDebug() << "JSON данные:" << QString(jsonData);
     
     // Отправляем запрос
     QNetworkReply *reply = networkManager->post(request, jsonData);
 
+    // Подключаем обработчик получения данных
+    connect(reply, &QNetworkReply::readyRead, this, [this, reply]() {
+        // Получаем новые данные
+        QByteArray data = reply->readAll();
+        qDebug() << "Получены данные:" << QString(data) <<"\n";
+        // Сохраняем данные в файл response.txt
+        QFile respFile("../ml/response.txt");
+        if (respFile.open(QIODevice::Append | QIODevice::Text)) {
+            QTextStream out(&respFile);
+            out << QString(data);
+            respFile.close();
+        }
+        
+        
+        // Парсим JSON-ответ
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(data);
+        if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+            QJsonObject jsonObj = jsonDoc.object();
+            
+            // Проверяем наличие поля progress
+            if (jsonObj.contains("progress")) {
+                int progress = jsonObj["progress"].toInt();
+                emit progressUpdated(progress);
+                qDebug() << "Прогресс генерации:" << progress << "%";
+            }
+
+        }
+
+    });
+
     // Подключаем обработчик завершения запроса
     connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            qDebug() << "Успешно получен ответ от сервера";
-            // Получаем ответ
-            QByteArray responseData = reply->readAll();
-            qDebug() << "Ответ сервера:" << QString(responseData);
-            
-            QJsonDocument response = QJsonDocument::fromJson(responseData);
-            QJsonObject jsonResponse = response.object();
-
-            // Декодируем base64 в изображение
-            QByteArray imageData = QByteArray::fromBase64(jsonResponse["image"].toString().toLatin1());
-            QImage generatedImage;
-            generatedImage.loadFromData(imageData);
-
-            // Отображаем изображение в выделенной области
-            QPainter painter(&image);
-            painter.drawImage(selectionRect, generatedImage);
-            update();
-        } else {
+        if (reply->error() != QNetworkReply::NoError) {
             QString errorString = reply->errorString();
             qDebug() << "Ошибка при получении ответа:" << errorString;
             QMessageBox::warning(this, tr("Ошибка"), tr("Не удалось получить изображение с сервера: %1").arg(errorString));
         }
         reply->deleteLater();
+        QFile response("../ml/response.txt");
+        if (response.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream in(&response);
+            QString lastLine;
+            while (!in.atEnd()) {
+                lastLine = in.readLine();
+            }
+            response.close();
+
+            QJsonDocument doc = QJsonDocument::fromJson(lastLine.toUtf8());
+            if (!doc.isNull() && doc.isObject()) {
+                QJsonObject obj = doc.object();
+                if (obj.contains("progress")) {
+                    int progress = obj["progress"].toInt();
+                    //emit progressUpdated(progress);
+                }
+                if (obj.contains("image") && obj["image"].isString()) {
+                    qDebug() << "Image data:" << obj["image"].toString();
+                    // Декодируем base64 в изображение
+                    QByteArray imageData = QByteArray::fromBase64(obj["image"].toString().toLatin1());
+                    QImage generatedImage;
+                    generatedImage.loadFromData(imageData);
+
+                    // Отображаем изображение в выделенной области
+                    QPainter painter(&image);
+                    painter.drawImage(selectionRect, generatedImage);
+                    update();
+                }
+            }
+        }
     });
 
     return true;

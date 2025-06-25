@@ -38,6 +38,7 @@ private slots:
     void on_actionNone_triggered(); // Обработчик нажатия выбора режима
     void on_horizontalSlider_valueChanged(int value) {scribbleArea->setPenWidth(value);};
     void on_actionReset_triggered();
+    void updateProgressBar(int value);
 
 private:
     Ui::Canvas *ui;
