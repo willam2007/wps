@@ -1,6 +1,8 @@
 #include "canvas.h"
 #include "ui_canvas.h"
 #include "../area/scribblearea.h"
+#include "../mainwindow/mainwindow.h"
+#include "../other/rainbowlabel.h"
 
 #include <qboxlayout.h>
 #include <qpainter.h>
@@ -17,9 +19,38 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     
     //setAttribute(Qt::WA_StaticContents); // Устанавливаем статическое содержимое
     ui->setupUi(this); // Настраиваем интерфейс из файла .ui
+    RainbowLabel *rainbowLabel = findChild<RainbowLabel*>("WPSLabel");
+    if (rainbowLabel) {
+        rainbowLabel->setText("Ваш WPS");
+        rainbowLabel->setAlignment(Qt::AlignCenter);
+        rainbowLabel->setFont(QFont("Segoe UI", 32, QFont::Bold));
+    }
     ui->canvas_pages->setCurrentWidget(ui->inactive_page);
+    // Минималистичный современный стиль для окна и элементов
+    QString style = "QMainWindow { background-color:rgb(36, 36, 36); } "
+                    "QLabel { color: #f7f7fa; font-size: 20px; font-weight: 500; letter-spacing: 0.5px; } "
+                    "QPushButton { background-color: #eebbc3; color:rgb(26, 25, 25); border-radius: 14px; padding: 4px 12px; font-size: 16px; font-weight: 500; box-shadow: 0 2px 12px rgba(180,193,236,0.10); border: none; transition: background 0.2s, color 0.2s; } "
+                    "QPushButton:hover { background-color:rgb(237, 148, 161); color: #232946; } "
+                    "QPushButton:pressed { background-color:rgb(241, 118, 136); color:rgb(26, 25, 25); } "
+                    "QMessageBox { background-color: rgb(36, 36, 36); color: #f7f7fa; font-size: 18px; } "
+                    "QMessageBox QLabel { color: #f7f7fa; font-size: 20px; font-weight: 500; letter-spacing: 0.5px; } "
+                    "QMessageBox QPushButton { background-color: #eebbc3; color: #232946; border-radius: 10px; padding: 4px 16px; font-size: 16px; } ";
+    this->setStyleSheet(style);
+    // Стилизация canvas_space и frame
+    ui->canvas_space->setStyleSheet("#canvas_space { background-color:rgb(159, 160, 161); }");
+    ui->frame_2->setStyleSheet("#frame_2 { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36);  }");
+    ui->frame->setStyleSheet("#frame { border: 2px solid #eebbc3; border-radius: 15px; background: rgb(36, 36, 36); padding: 10px; margin: 5px; }");
+    ui->canvas_pages->setStyleSheet(
+        "QStackedWidget#canvas_pages { background: rgb(36, 36, 36); } "
+        "QWidget#pen_page, QWidget#selecting_page, QWidget#text_page { border: 2px solid #eebbc3; border-radius: 15px; padding: 10px; margin: 5px; } "
+        "QLabel { color: #f7f7fa; font-size: 16px; font-weight: 500; letter-spacing: 0.5px; } "
+        "QSlider::groove:horizontal { border: 1px solid #bdc3c7; height: 8px; background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dfe6e9, stop:1 #b2bec3); margin: 2px 0; border-radius: 4px; } "
+        "QSlider::handle:horizontal { background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #2980b9, stop:1 #3498db); border: 1px solid #2980b9; width: 18px; margin: -5px 0; border-radius: 9px; } "
+    );
+    ui->progressBar->setStyleSheet(
+        "QProgressBar {\n    border: 2px solid #eebbc3;\n    border-radius: 5px;\n    background-color: rgb(255, 255, 255);\n    text-align: center;\n    color:rgb(0, 0, 0);\n}\n\nQProgressBar::chunk {\n    background-color: #eebbc3;\n    border-radius: 3px;\n}\n"
+    );
     
-    // Create window fade-in animation
     QPropertyAnimation* windowFadeIn = new QPropertyAnimation(this, "windowOpacity");
     windowFadeIn->setDuration(600);
     windowFadeIn->setStartValue(0.0);
@@ -31,63 +62,48 @@ Canvas::Canvas(int width, int height, QWidget *parent)
 
     // Connect color button to penColor slot
     connect(ui->colorButton, &QPushButton::clicked, this, &Canvas::penColor);
-    ui->canvas_space->setFixedSize(width, height);
-    // Задаем стиль для canvas_space
-    // Устанавливаем стиль ТОЛЬКО для canvas_space
-    ui->canvas_space->setStyleSheet(
-        "#canvas_space {"
-        "    border: 2px solid black;"
-        "    border-radius: 10px;"
-        "    background-color: lightgray;"
-        "}"
-        );
-    ui->frame->setStyleSheet(
-        "#frame {"
-        "    border: 2px solid black;"
-        "    border-radius: 10px;"
-        "    background-color: #8f8684;"
-        "}"
-        );
-    ui->canvas_pages->setStyleSheet(
-        "QStackedWidget#canvas_pages {"
-        "    border: 2px solid #2c3e50;"
-        "    border-radius: 15px;"
-        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-        "                              stop:0 #ecf0f1, stop:1 #bdc3c7);"
-        "    padding: 10px;"
-        "    margin: 5px;"
-        "}"
-        "QWidget#pen_page, QWidget#inactive_page {"
-        "    background: transparent;"
-        "}"
-        "QSlider::groove:horizontal {"
-        "    border: 1px solid #bdc3c7;"
-        "    height: 8px;"
-        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-        "                              stop:0 #dfe6e9, stop:1 #b2bec3);"
-        "    margin: 2px 0;"
-        "    border-radius: 4px;"
-        "}"
-        "QSlider::handle:horizontal {"
-        "    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, "
-        "                              stop:0 #2980b9, stop:1 #3498db);"
-        "    border: 1px solid #2980b9;"
-        "    width: 18px;"
-        "    margin: -5px 0;"
-        "    border-radius: 9px;"
-        "}"
-        "QLabel {"
-        "    color: #2c3e50;"
-        "    font-size: 14px;"
-        "    font-weight: bold;"
-        "}"
-    );
+    
+    // Connect text color and font buttons to their slots
+    connect(ui->textColorButton, &QPushButton::clicked, this, &Canvas::textColor);
+    connect(ui->fontButton, &QPushButton::clicked, this, &Canvas::textFont);
+    connect(scribbleArea, &ScribbleArea::progressUpdated, this, &Canvas::updateProgressBar);
+
+    ui->progressBar->hide();
+
+
+
+    if (width == 1920 && height == 1080) {
+        ui->canvas_space->setFixedSize(1780, 1080);
+    } else {
+        ui->canvas_space->setFixedSize(width, height);
+    }
+
+
+
 
     // Set up fade effect for page transitions
     QGraphicsOpacityEffect *effect = new QGraphicsOpacityEffect(ui->canvas_pages);
     ui->canvas_pages->setGraphicsEffect(effect);
     effect->setOpacity(1.0);
+    // Подключаем кнопки инструментов из панели frame
+    connect(ui->penButton, &QPushButton::clicked, this, &Canvas::on_actionPen_triggered);
+    connect(ui->selectingButton, &QPushButton::clicked, this, &Canvas::on_actionSelecting_triggered);
+    connect(ui->textButton, &QPushButton::clicked, this, &Canvas::on_actionText_triggered);
+    connect(ui->clearButton, &QPushButton::clicked, this, &Canvas::on_actionClear_triggered);
+    connect(ui->resetButton, &QPushButton::clicked, this, &Canvas::on_actionReset_triggered);
+    connect(ui->noneButton, &QPushButton::clicked, this, &Canvas::on_actionNone_triggered);
+    connect(ui->openButton, &QPushButton::clicked, this, &Canvas::openIm);
+    connect(ui->saveButton, &QPushButton::clicked, [this]() { saveFile("png"); });
+    connect(ui->aboutButton, &QPushButton::clicked, this, &Canvas::about);
+}
 
+void Canvas::updateProgressBar(int value) {
+    ui->progressBar->setValue(value);
+    if (value == 0 || value == 100) {
+        ui->progressBar->hide();
+    } else {
+        ui->progressBar->show();
+    }
 }
 
 // Пользователь пытается закрыть приложение
@@ -131,12 +147,17 @@ void Canvas::openIm()
 
         // Открываем диалог выбора файла
         QString fileName = QFileDialog::getOpenFileName(this,
-                                                        tr("Open File"), dir.absolutePath());
+                                                        tr("Открыть проект"), dir.absolutePath());
         // Если выбрали файл, загружаем его в scribbleArea
         if (!fileName.isEmpty()) {
             QSize canvasSize = getCanvasSpaceSize(); // Получаем размер canvas_space
             scribbleArea->openImage(fileName, canvasSize); // Передаем файл и размер
-        }
+            this->show();
+        } else {
+            MainWindow *mainWindow = new MainWindow();
+            mainWindow->show();
+            this->close();
+        } 
     }
 }
 
@@ -145,19 +166,17 @@ bool Canvas::maybeSave()
 {
     // Проверяем, были ли изменения
     if (scribbleArea->isModified()) {
-        QMessageBox::StandardButton ret;
-
-        // Показываем диалоговое окно с предложением сохранить изменения
-        ret = QMessageBox::warning(this, tr("Уверены?"),
-                                   tr("Изображение было изменено.\n"
-                                      "Хотите сохранить изменения?"),
-                                   QMessageBox::Yes | QMessageBox::Cancel
-                                       | QMessageBox::No);
-
-        // Если нажали "Сохранить", вызываем сохранение
-        if (ret == QMessageBox::Yes) {
+        QMessageBox msgBox(this);
+        msgBox.setWindowTitle(tr("Уверены?"));
+        msgBox.setText(tr("Изображение было изменено.\nХотите сохранить изменения?"));
+        QPushButton *yesButton = msgBox.addButton(tr("Да"), QMessageBox::YesRole);
+        QPushButton *noButton = msgBox.addButton(tr("Нет"), QMessageBox::NoRole);
+        QPushButton *cancelButton = msgBox.addButton(tr("Отмена"), QMessageBox::RejectRole);
+        msgBox.setDefaultButton(yesButton);
+        msgBox.exec();
+        if (msgBox.clickedButton() == yesButton) {
             return saveFile("png");
-        } else if (ret == QMessageBox::Cancel) {
+        } else if (msgBox.clickedButton() == cancelButton) {
             // Если нажали "Отмена", не закрываем окно
             return false;
         }
@@ -245,7 +264,7 @@ void Canvas::on_actionNone_triggered()
 {
     scribbleArea->setMode(ScribbleArea::Inactive); // Обработчик нажатия выбора режима
     setupPageTransition(ui->inactive_page);
-};
+}
 
 void Canvas::on_actionReset_triggered()
 {
@@ -253,4 +272,40 @@ void Canvas::on_actionReset_triggered()
     scribbleArea->setZoomFactor(1.0);
     scribbleArea->resetViewport();
     update();
+}
+
+void Canvas::on_actionSelecting_triggered()
+{
+    // Устанавливаем режим выделения для ScribbleArea
+    scribbleArea->setMode(ScribbleArea::Selecting);
+    setupPageTransition(ui->selecting_page);
+}
+
+void Canvas::on_actionText_triggered()
+{
+    // Устанавливаем режим текста для ScribbleArea
+    scribbleArea->setMode(ScribbleArea::Text);
+    setupPageTransition(ui->text_page);
+}
+
+// Открывает диалог для изменения цвета текста
+void Canvas::textColor()
+{
+    // Сохраняем выбранный цвет из диалога
+    QColor newColor = QColorDialog::getColor(scribbleArea->getTextColor());
+
+    // Если цвет валиден, устанавливаем его
+    if (newColor.isValid())
+        scribbleArea->setTextColor(newColor);
+}
+
+// Открывает диалог для изменения шрифта текста
+void Canvas::textFont()
+{
+    bool ok;
+    QFont newFont = QFontDialog::getFont(&ok, scribbleArea->getTextFont(), this, tr("Выбор шрифта"));
+    
+    if (ok) {
+        scribbleArea->setTextFont(newFont);
+    }
 }
