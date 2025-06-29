@@ -38,7 +38,7 @@ Choose::Choose(QWidget *parent)
 
 void Choose::on_pushButton_1920_1080_clicked()
 {
-    ui->spinBox_width->setValue(1920);
+    ui->spinBox_width->setValue(1780);
     ui->spinBox_height->setValue(1080);
 }
 

@@ -71,8 +71,8 @@ Canvas::Canvas(int width, int height, QWidget *parent)
 
 
 
-    //ui->canvas_space->setFixedSize(width, height);
-    ui->canvas_space->setFixedSize(1780, 1080);
+    ui->canvas_space->setFixedSize(width, height);
+    //ui->canvas_space->setFixedSize(1780, 1080);
 
 
 

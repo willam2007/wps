@@ -95,13 +95,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="eraserButton">
-         <property name="text">
-          <string>Eraser</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="aboutButton">
          <property name="text">
           <string>О программе</string>
@@ -418,7 +411,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1274</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
