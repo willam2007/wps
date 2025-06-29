@@ -47,7 +47,10 @@ Canvas::Canvas(int width, int height, QWidget *parent)
         "QSlider::groove:horizontal { border: 1px solid #bdc3c7; height: 8px; background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #dfe6e9, stop:1 #b2bec3); margin: 2px 0; border-radius: 4px; } "
         "QSlider::handle:horizontal { background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #2980b9, stop:1 #3498db); border: 1px solid #2980b9; width: 18px; margin: -5px 0; border-radius: 9px; } "
     );
-    // Create window fade-in animation
+    ui->progressBar->setStyleSheet(
+        "QProgressBar {\n    border: 2px solid #eebbc3;\n    border-radius: 5px;\n    background-color: rgb(255, 255, 255);\n    text-align: center;\n    color:rgb(0, 0, 0);\n}\n\nQProgressBar::chunk {\n    background-color: #eebbc3;\n    border-radius: 3px;\n}\n"
+    );
+    
     QPropertyAnimation* windowFadeIn = new QPropertyAnimation(this, "windowOpacity");
     windowFadeIn->setDuration(600);
     windowFadeIn->setStartValue(0.0);
@@ -63,13 +66,17 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     // Connect text color and font buttons to their slots
     connect(ui->textColorButton, &QPushButton::clicked, this, &Canvas::textColor);
     connect(ui->fontButton, &QPushButton::clicked, this, &Canvas::textFont);
+    connect(scribbleArea, &ScribbleArea::progressUpdated, this, &Canvas::updateProgressBar);
+
+    ui->progressBar->hide();
 
 
 
-
-
-    //ui->canvas_space->setFixedSize(width, height);
-    ui->canvas_space->setFixedSize(1780, 1080);
+    if (width == 1920 && height == 1080) {
+        ui->canvas_space->setFixedSize(1780, 1080);
+    } else {
+        ui->canvas_space->setFixedSize(width, height);
+    }
 
 
 
@@ -88,6 +95,15 @@ Canvas::Canvas(int width, int height, QWidget *parent)
     connect(ui->openButton, &QPushButton::clicked, this, &Canvas::openIm);
     connect(ui->saveButton, &QPushButton::clicked, [this]() { saveFile("png"); });
     connect(ui->aboutButton, &QPushButton::clicked, this, &Canvas::about);
+}
+
+void Canvas::updateProgressBar(int value) {
+    ui->progressBar->setValue(value);
+    if (value == 0 || value == 100) {
+        ui->progressBar->hide();
+    } else {
+        ui->progressBar->show();
+    }
 }
 
 // Пользователь пытается закрыть приложение

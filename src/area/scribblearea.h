@@ -58,6 +58,9 @@ public slots:
     // Напечатать изображение
     void print();
 
+signals:
+    void progressUpdated(int value);
+
 protected:
     // Обработка нажатия кнопки мыши
     void mousePressEvent(QMouseEvent *event) override;

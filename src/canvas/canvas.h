@@ -41,7 +41,8 @@ private slots:
     void on_actionReset_triggered();
     void textColor(); // Обработчик изменения цвета текста
     void textFont(); // Обработчик изменения шрифта текста
-
+    void updateProgressBar(int value);
+    
 private:
     Ui::Canvas *ui;
     ScribbleArea *scribbleArea;
